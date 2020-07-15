@@ -1,38 +1,46 @@
 package replica
 
+func defaultReplicaOptions() replicaOptions {
+	return replicaOptions{}
+}
+
+type replicaOptions struct{}
+
+type ReplicaOptions interface {
+	apply(*replicaOptions)
+}
+
+type funcReplicaOptions struct {
+	f func(*replicaOptions)
+}
+
+func (fro *funcReplicaOptions) apply(ro *replicaOptions) {
+	fro.f(ro)
+}
+
+func newFuncReplicaOption(f func(*replicaOptions)) *funcReplicaOptions {
+	return &funcReplicaOptions{
+		f: f,
+	}
+}
+
 // New creates a new replica with the specified identifier, given a store and input stream.
-func New(id string, store Store, in <-chan interface{}) *Replica {
-	return &Replica{}
+func New(id string, store StateHandler, opts ...ReplicaOptions) *Replica {
+	dopts := defaultReplicaOptions()
+
+	for _, opt := range opts {
+		opt.apply(&dopts)
+	}
+
+	return &Replica{
+		id: id,
+		sh: store,
+	}
 }
 
-// TODO: delete?
-// type (
-// 	// SetFn specifies how to set the value for a key.
-// 	SetFn func(k, v interface{})
-// 	// GetFn specifies how to retreive the value for a key.
-// 	GetFn func(k interface{}) interface{}
-// 	// GetStateFn specifies how to retreive the entire state of the store.
-// 	GetStateFn func() interface{}
-// )
-
-type Store interface {
-	// Set sets the value for a key.
-	Set(k, v interface{})
-	// Get retreives the value for a key.
-	Get(k interface{}) interface{}
-	// GetState returns the entire state of the store.
-	GetState() interface{}
-}
-
-// Replica is a single instance of a, potentially replicated, store.
-//
-// TODO: Currently, there is no concept of a leader / follower replica.
-// Some options for this could be either a leader / follower field on the Replica
-// struct or something like a {Leader,Follower}Replica implementation of a Replica interface.
 type Replica struct {
-	id    string
-	in    <-chan interface{}
-	store Store
+	id string
+	sh StateHandler
 }
 
 // ID returns the specified identifier for the replica.
@@ -41,6 +49,34 @@ func (r *Replica) ID() string {
 }
 
 // Store returns the replica's store.
-func (r *Replica) Store() interface{} {
-	return r.store
+func (r *Replica) StateHandler() StateHandler {
+	return r.sh
+}
+
+// Algorithm defines the minimal interface that an algorithm must implement for
+// storing and retreiving state from a Store.
+type Algorithm interface {
+	// Set determines how to set a key to a specified value across multiple state handlers.
+	Set(interface{}, interface{}) error
+	// Get determines how to retreive the value for a specified key from multiple state handlers.
+	Get(interface{}) (interface{}, error)
+	// Replicas retreives the replicas where state is being replicated.
+	Replicas() map[string]StateHandler
+}
+
+type Setter interface {
+	// Set sets the value for a key.
+	Set(interface{}, interface{}) error
+}
+
+type Getter interface {
+	// Get retreives the value for a key.
+	Get(interface{}) (interface{}, error)
+	// GetState returns the entire state of the store.
+	GetState() (interface{}, error)
+}
+
+type StateHandler interface {
+	Setter
+	Getter
 }
