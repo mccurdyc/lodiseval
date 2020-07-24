@@ -18,6 +18,11 @@ default: help
 all: mod-download dev-dependencies tidy fmt fiximports test vet staticcheck ## Runs the required cleaning and verification targets.
 .PHONY: all
 
+build: ## Builds the binary.
+	@echo "==> Building binary."
+	@go build -o bin/lodiseval main.go
+.PHONY: build
+
 tidy: ## Cleans the Go module.
 	@echo "==> Tidying module."
 	@go mod tidy
