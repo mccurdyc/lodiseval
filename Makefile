@@ -18,7 +18,13 @@ default: help
 all: mod-download dev-dependencies tidy fmt fiximports test vet staticcheck ## Runs the required cleaning and verification targets.
 .PHONY: all
 
-build: ## Builds the binary.
+generate: ## Compiles protobufs, generating Go code.
+	@echo "==> Compiling protobufs."
+	@# TODO: Make more flexible.
+	@protoc -I replicamanager replicamanager/health.proto --go_out=plugins=grpc:replicamanager
+.PHONY: generate
+
+build: generate ## Compiles the protobufs and builds the lodiseval binary.
 	@echo "==> Building binary."
 	@go build -o bin/lodiseval main.go
 .PHONY: build

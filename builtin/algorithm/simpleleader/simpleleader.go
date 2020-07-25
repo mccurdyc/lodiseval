@@ -26,13 +26,13 @@ type Algorithm struct {
 // in the leader is successful, state is attempted to be replicated to the follower
 // replicas.
 func (a *Algorithm) Set(k interface{}, v interface{}) error {
-	if err := a.replicas[a.leader].Store().Set(k, v); err != nil {
+	if err := a.replicas[a.leader].Store.Set(k, v); err != nil {
 		return fmt.Errorf("failed to set in leader (%s): %w", a.leader, err)
 	}
 
 	// Serially set state across replicas.
 	for id, r := range a.replicas {
-		if err := r.Store().Set(k, v); err != nil {
+		if err := r.Store.Set(k, v); err != nil {
 			// We shouldn't really care if a replica fails in this example, so just log.
 			log.Println(fmt.Errorf("failed to set in follower (%s): %w", id, err))
 		}
@@ -45,7 +45,7 @@ func (a *Algorithm) Set(k interface{}, v interface{}) error {
 //
 // EXAMPLE: This is a trivial example where state is always retreived from the leader.
 func (a *Algorithm) Get(k interface{}) (interface{}, error) {
-	v, err := a.Replicas()[a.leader].Store().Get(k)
+	v, err := a.replicas[a.leader].Store.Get(k)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get from leader (%s): %w", a.leader, err)
 	}

@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"log"
 	"os"
 
 	"github.com/peterbourgon/ff/v3/ffcli"
@@ -20,7 +21,7 @@ func main() {
 func Run(ctx context.Context, args []string) int {
 	root := &ffcli.Command{
 		Name:       "lodiseval",
-		ShortUsage: "lodiseval [flags]",
+		ShortUsage: "lodiseval <subcommand> [flags]",
 		Subcommands: []*ffcli.Command{
 			replicamanager.NewCommand(),
 			algorithm.NewCommand(
@@ -38,6 +39,8 @@ func Run(ctx context.Context, args []string) int {
 
 	err := root.ParseAndRun(context.Background(), os.Args[1:])
 	if err != nil {
+		// TODO better logging
+		log.Fatal(err)
 		return 1
 	}
 

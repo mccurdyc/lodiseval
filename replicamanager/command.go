@@ -2,16 +2,21 @@ package replicamanager
 
 import (
 	"context"
-	"errors"
 	"flag"
+	"fmt"
+	"net"
 
 	"github.com/peterbourgon/ff/v3/ffcli"
+	"google.golang.org/grpc"
+)
+
+var (
+	flagSet = flag.NewFlagSet("replicamanager", flag.ExitOnError)
+	port    = flagSet.Int("port", 8118, "the port where replicamanager will listen")
 )
 
 // TODO: think a bit more as there is some implementation detail bleed with ffcli.Command being returned.
 func NewCommand() *ffcli.Command {
-	flagSet := flag.NewFlagSet("replicamanager", flag.ExitOnError)
-
 	return &ffcli.Command{
 		Name:       "replicamanager",
 		ShortUsage: "lodiseval replicamanager <subcommand>",
@@ -23,14 +28,25 @@ func NewCommand() *ffcli.Command {
 				ShortUsage: "start [flags]",
 				ShortHelp:  "Start the replicamanager",
 				FlagSet:    flagSet,
-				Exec:       start(),
+				Exec:       start(*port),
 			},
 		},
 	}
 }
 
-func start() func(context.Context, []string) error {
+func start(port int) func(context.Context, []string) error {
 	return func(_ context.Context, _ []string) error {
-		return errors.New("not implemented")
+		lis, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
+		if err != nil {
+			return err
+		}
+
+		s := grpc.NewServer()
+		RegisterHealthServer(s, &server{})
+		if err := s.Serve(lis); err != nil {
+			return err
+		}
+
+		return nil
 	}
 }
