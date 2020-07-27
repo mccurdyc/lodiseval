@@ -8,6 +8,7 @@ import (
 
 	"github.com/peterbourgon/ff/v3/ffcli"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 var (
@@ -42,6 +43,7 @@ func start(port int) func(context.Context, []string) error {
 		}
 
 		s := grpc.NewServer()
+		reflection.Register(s)
 		RegisterHealthServer(s, &server{})
 		if err := s.Serve(lis); err != nil {
 			return err
