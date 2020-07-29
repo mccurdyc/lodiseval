@@ -1,0 +1,106 @@
+syntax = "proto3";
+
+package replicamanager;
+option go_package = ".;replicamanager";
+
+service ReplicaManager {
+// =====================================================
+// Replica Management.
+// =====================================================
+  rpc CreateReplica(CreateReplicaRequest) returns (CreateReplicaResponse);
+  rpc ListReplicas(ListReplicasRequest) returns (ListReplicasResponse);
+  rpc DeleteReplica(DeleteReplicaRequest) returns (DeleteReplicaResponse);
+
+// =====================================================
+// Leader Management.
+// =====================================================
+  rpc SetLeader(SetLeaderRequest) returns (SetLeaderResponse);
+  rpc GetLeader(GetLeaderRequest) returns (GetLeaderResponse);
+
+// =====================================================
+// Value Storage and Retrieval Operations.
+// =====================================================
+  rpc Set(SetRequest) returns (SetResponse);
+  rpc Get(GetRequest) returns (GetResponse);
+
+// =====================================================
+// Algorithm Management.
+// =====================================================
+  rpc SetAlgorithm(SetAlgorithmRequest) returns (SetAlgorithmResponse);
+  rpc GetAlgorithm(GetAlgorithmRequest) returns (GetAlgorithmResponse);
+}
+
+// =====================================================
+// Replica Management.
+// =====================================================
+message CreateReplicaRequest {
+  string address = 1;
+  string algorithm = 2;
+  string store = 3;
+  uint32 sync_interval_sec = 4;
+}
+
+message CreateReplicaResponse {
+  string id = 1;
+}
+
+message ListReplicasRequest {}
+
+message ListReplicasResponse {
+  repeated string id = 1;
+}
+
+message DeleteReplicaRequest {
+  string id = 1;
+}
+
+message DeleteReplicaResponse {
+  string status = 1;
+}
+
+// =====================================================
+// Leader Management.
+// =====================================================
+message SetLeaderRequest {
+  string id = 1;
+}
+
+message SetLeaderResponse {}
+
+message GetLeaderRequest{}
+
+message GetLeaderResponse{
+  string id = 1;
+}
+
+// =====================================================
+// Value Storage and Retrieval Operations.
+// =====================================================
+message SetRequest{
+  string key = 1;
+  string value = 2;
+}
+
+message SetResponse{}
+
+message GetRequest{
+  string key = 1;
+}
+
+message GetResponse{
+  string value = 1;
+}
+
+// =====================================================
+// Algorithm Management.
+// =====================================================
+message SetAlgorithmRequest{
+  string algorithm = 1;
+}
+message SetAlgorithmResponse{}
+
+message GetAlgorithmRequest{}
+
+message GetAlgorithmResponse{
+  string algorithm = 1;
+}
