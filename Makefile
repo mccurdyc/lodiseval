@@ -20,8 +20,8 @@ all: mod-download dev-dependencies tidy fmt fiximports test vet staticcheck ## R
 
 generate: ## Compiles protobufs, generating Go code.
 	@echo "==> Compiling protobufs."
-	@# TODO: Make more flexible.
-	@protoc -I replicamanager replicamanager/health.proto --go_out=plugins=grpc:replicamanager
+	@# TODO: Make more flexible. Something like `find -name *.proto -exec protoc ...`
+	@protoc -I replicamanager --go_out=plugins=grpc:replicamanager replicamanager.proto
 .PHONY: generate
 
 build: generate ## Compiles the protobufs and builds the lodiseval binary.

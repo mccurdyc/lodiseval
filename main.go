@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/peterbourgon/ff/v3/ffcli"
+	"github.com/rs/zerolog"
 
 	"github.com/mccurdyc/lodiseval/algorithm"
 	"github.com/mccurdyc/lodiseval/builtin/algorithm/simpleleader"
@@ -15,15 +16,18 @@ import (
 )
 
 func main() {
-	os.Exit(Run(context.Background(), os.Args[1:]))
+	l := zerolog.New(os.Stdout)
+	logger := log.New(l, "", log.Ldate|log.Ltime|log.LUTC)
+
+	os.Exit(Run(context.Background(), os.Args[1:], logger))
 }
 
-func Run(ctx context.Context, args []string) int {
+func Run(ctx context.Context, args []string, l *log.Logger) int {
 	root := &ffcli.Command{
 		Name:       "lodiseval",
 		ShortUsage: "lodiseval <subcommand> [flags]",
 		Subcommands: []*ffcli.Command{
-			replicamanager.NewCommand(),
+			replicamanager.NewCommand(l),
 			algorithm.NewCommand(
 				map[string]algorithm.Factory{
 					"simpleleader": simpleleader.Factory,
