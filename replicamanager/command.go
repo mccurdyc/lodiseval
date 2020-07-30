@@ -56,6 +56,9 @@ func start(port int, logger *log.Logger) func(context.Context, []string) error {
 		// Add reflection so that clients can query for available services, methods, etc.
 		reflection.Register(s)
 
+		// Register ReplicaManager server.
+		RegisterReplicaManagerServer(s, &server{})
+
 		// https://github.com/grpc/grpc-go/blob/master/examples/features/health/server/main.go
 		healthcheck.SetServingStatus(serviceName, healthpb.HealthCheckResponse_SERVING)
 

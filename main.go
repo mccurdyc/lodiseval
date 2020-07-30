@@ -43,8 +43,7 @@ func Run(ctx context.Context, args []string, l *log.Logger) int {
 
 	err := root.ParseAndRun(context.Background(), os.Args[1:])
 	if err != nil {
-		// TODO better logging
-		log.Fatal(err)
+		l.Fatal(err)
 		return 1
 	}
 
