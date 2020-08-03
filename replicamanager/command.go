@@ -32,10 +32,48 @@ func NewCommand(logger *log.Logger) *ffcli.Command {
 			{
 				Name:       "start",
 				ShortUsage: "start [flags]",
-				ShortHelp:  "Start the replicamanager",
+				ShortHelp:  "Start the replicamanager server.",
 				FlagSet:    flagSet,
 				Exec:       start(*port, logger),
 			},
+			{
+				Name:       "replica",
+				ShortUsage: "lodiseval replicamanager replica <subcommand>",
+				ShortHelp:  "Interact with an individual replica in the cluster.",
+				FlagSet:    flagSet,
+				Subcommands: []*ffcli.Command{
+					{
+						Name:       "start",
+						ShortUsage: "start [flags]",
+						ShortHelp:  "Start a single replica server.",
+						FlagSet:    flagSet,
+						Exec: func(ctx context.Context, args []string) error {
+							conn, err := grpc.Dial(fmt.Sprintf(":%d", *port), grpc.WithInsecure())
+							if err != nil {
+								return err
+							}
+							defer conn.Close()
+
+							client := NewReplicaManagerClient(conn)
+							_, err = client.CreateReplica(ctx, &CreateReplicaRequest{
+								// TODO: don't hardcode these values.
+								Address:         ":8119",
+								Algorithm:       "simpleleader",
+								Store:           "mapstore",
+								SyncIntervalSec: 5,
+							})
+
+							return err
+						},
+					},
+				},
+				Exec: func(context.Context, []string) error {
+					return flag.ErrHelp
+				},
+			},
+		},
+		Exec: func(context.Context, []string) error {
+			return flag.ErrHelp
 		},
 	}
 }
@@ -51,16 +89,16 @@ func start(port int, logger *log.Logger) func(context.Context, []string) error {
 
 		// Add standardized healthcheck.
 		healthcheck := health.NewServer()
+		healthcheck.SetServingStatus(serviceName, healthpb.HealthCheckResponse_SERVING)
 		healthpb.RegisterHealthServer(s, healthcheck)
 
 		// Add reflection so that clients can query for available services, methods, etc.
 		reflection.Register(s)
 
 		// Register ReplicaManager server.
-		RegisterReplicaManagerServer(s, &server{})
-
-		// https://github.com/grpc/grpc-go/blob/master/examples/features/health/server/main.go
-		healthcheck.SetServingStatus(serviceName, healthpb.HealthCheckResponse_SERVING)
+		RegisterReplicaManagerServer(s, &server{
+			logger: logger,
+		})
 
 		logger.Printf("server listening on port :%d\n", port)
 		if err := s.Serve(lis); err != nil {

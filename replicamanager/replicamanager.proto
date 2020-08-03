@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 package replicamanager;
+
 option go_package = ".;replicamanager";
 
 service ReplicaManager {
