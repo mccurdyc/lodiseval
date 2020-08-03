@@ -58,7 +58,7 @@ func (a *Algorithm) Replicas() map[string]*replica.Replica {
 	m := make(map[string]*replica.Replica)
 
 	for _, r := range a.replicas {
-		m[r.ID()] = r
+		m[r.ID] = r
 	}
 
 	return m
