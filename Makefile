@@ -20,8 +20,7 @@ all: mod-download dev-dependencies tidy fmt fiximports test vet staticcheck ## R
 
 generate: ## Compiles protobufs, generating Go code.
 	@echo "==> Compiling protobufs."
-	@# TODO: Make more flexible. Something like `find -name *.proto -exec protoc ...`
-	@protoc -I replicamanager --go_out=plugins=grpc:replicamanager replicamanager.proto
+	@find . -type f -name *.proto | awk -F'[./]' '{system("protoc -I "$$3" --go_out=plugins=grpc:"$$3" "$$4".proto")}'
 .PHONY: generate
 
 build: generate ## Compiles the protobufs and builds the lodiseval binary.
