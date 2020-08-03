@@ -1,12 +1,52 @@
 package replica
 
-import "github.com/mccurdyc/lodiseval/store"
+import (
+	"context"
+	"log"
+	"net"
 
-// TODO
+	"github.com/mccurdyc/lodiseval/store"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/health"
+	healthpb "google.golang.org/grpc/health/grpc_health_v1"
+	"google.golang.org/grpc/reflection"
+)
+
 type Replica struct {
+	ID    string
 	Store store.Store
 }
 
-func (r *Replica) ID() string {
-	return "foo"
+var serviceName = "replica"
+
+type Config struct {
+	Addr   string
+	Logger *log.Logger
+}
+
+func Create(ctx context.Context, cfg *Config) error {
+	lis, err := net.Listen("tcp", cfg.Addr)
+	if err != nil {
+		return err
+	}
+
+	s := grpc.NewServer()
+
+	// Add standardized healthcheck.
+	healthcheck := health.NewServer()
+	healthcheck.SetServingStatus(serviceName, healthpb.HealthCheckResponse_SERVING)
+	healthpb.RegisterHealthServer(s, healthcheck)
+
+	// Add reflection so that clients can query for available services, methods, etc.
+	reflection.Register(s)
+
+	// Register ReplicaManager server.
+	RegisterReplicaServer(s, &server{})
+
+	cfg.Logger.Printf("server listening on %s\n", cfg.Addr)
+	if err := s.Serve(lis); err != nil {
+		return err
+	}
+
+	return nil
 }

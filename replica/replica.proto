@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package replica;
+
+option go_package = ".;replica";
+
+service Replica {
+// =====================================================
+// Leader Management.
+// =====================================================
+  rpc SetLeader(SetLeaderRequest) returns (SetLeaderResponse);
+  rpc GetLeader(GetLeaderRequest) returns (GetLeaderResponse);
+
+// =====================================================
+// Value Storage and Retrieval Operations.
+// =====================================================
+  rpc Set(SetRequest) returns (SetResponse);
+  rpc Get(GetRequest) returns (GetResponse);
+
+// =====================================================
+// Algorithm Management.
+// =====================================================
+  rpc SetAlgorithm(SetAlgorithmRequest) returns (SetAlgorithmResponse);
+  rpc GetAlgorithm(GetAlgorithmRequest) returns (GetAlgorithmResponse);
+}
+
+// =====================================================
+// Leader Management.
+// =====================================================
+message SetLeaderRequest {
+  string id = 1;
+}
+
+message SetLeaderResponse {}
+
+message GetLeaderRequest{}
+
+message GetLeaderResponse{
+  string id = 1;
+}
+
+// =====================================================
+// Value Storage and Retrieval Operations.
+// =====================================================
+message SetRequest{
+  string key = 1;
+  string value = 2;
+}
+
+message SetResponse{}
+
+message GetRequest{
+  string key = 1;
+}
+
+message GetResponse{
+  string value = 1;
+}
+
+// =====================================================
+// Algorithm Management.
+// =====================================================
+message SetAlgorithmRequest{
+  string algorithm = 1;
+}
+message SetAlgorithmResponse{}
+
+message GetAlgorithmRequest{}
+
+message GetAlgorithmResponse{
+  string algorithm = 1;
+}
