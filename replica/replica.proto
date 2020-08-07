@@ -6,6 +6,11 @@ option go_package = ".;replica";
 
 service Replica {
 // =====================================================
+// Replica Management.
+// =====================================================
+  rpc ID(IDRequest) returns (IDResponse);
+
+// =====================================================
 // Leader Management.
 // =====================================================
   rpc SetLeader(SetLeaderRequest) returns (SetLeaderResponse);
@@ -22,6 +27,21 @@ service Replica {
 // =====================================================
   rpc SetAlgorithm(SetAlgorithmRequest) returns (SetAlgorithmResponse);
   rpc GetAlgorithm(GetAlgorithmRequest) returns (GetAlgorithmResponse);
+}
+
+message Replica {
+  string id = 1;
+  string address = 2;
+  string algorithm = 3;
+  string store = 4;
+}
+
+// =====================================================
+// Replica Management.
+// =====================================================
+message IDRequest {}
+message IDResponse {
+  string id = 1;
 }
 
 // =====================================================

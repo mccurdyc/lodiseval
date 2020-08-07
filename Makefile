@@ -61,7 +61,7 @@ fiximports: ## Properly formats and orders imports.
 	@goimports -w ${GO_PKG_DIRS_REL}
 .PHONY: fiximports
 
-fmt: ## Properly formats Go files and orders dependencies.
+fmt: fiximports tidy ## Properly formats Go files and orders dependencies.
 	@echo "==> Running gofmt."
 	@gofmt -s -w ${GO_FILES}
 .PHONY: fmt
@@ -76,7 +76,7 @@ staticcheck: ## Runs the staticcheck linter.
 	@staticcheck ./...
 .PHONY: staticcheck
 
-test: ## Runs the test suit with minimal flags for quick iteration.
+test: build staticcheck vet fmt ## Runs the test suit with minimal flags for quick iteration.
 	@go test -v ${GO_LIST}/...
 .PHONY: test
 

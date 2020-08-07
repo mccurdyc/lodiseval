@@ -20,6 +20,7 @@ type Replica struct {
 var serviceName = "replica"
 
 type Config struct {
+	ID     string
 	Addr   string
 	Logger *log.Logger
 }
@@ -41,9 +42,11 @@ func Create(ctx context.Context, cfg *Config) error {
 	reflection.Register(s)
 
 	// Register ReplicaManager server.
-	RegisterReplicaServer(s, &server{})
+	RegisterReplicaServer(s, &server{
+		id: cfg.ID,
+	})
 
-	cfg.Logger.Printf("server listening on %s\n", cfg.Addr)
+	cfg.Logger.Printf("replica server listening on %s\n", cfg.Addr)
 	if err := s.Serve(lis); err != nil {
 		return err
 	}
