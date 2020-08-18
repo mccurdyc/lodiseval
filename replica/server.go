@@ -1,5 +1,13 @@
 package replica
 
+import (
+	"log"
+)
+
 type server struct {
-	UnimplementedReplicaServer
+	UnimplementedReplicaSvcServer
+
+	logger *log.Logger
+
+	id string
 }

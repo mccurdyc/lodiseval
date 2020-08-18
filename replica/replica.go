@@ -5,21 +5,16 @@ import (
 	"log"
 	"net"
 
-	"github.com/mccurdyc/lodiseval/store"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/health"
 	healthpb "google.golang.org/grpc/health/grpc_health_v1"
 	"google.golang.org/grpc/reflection"
 )
 
-type Replica struct {
-	ID    string
-	Store store.Store
-}
-
 var serviceName = "replica"
 
 type Config struct {
+	ID     string
 	Addr   string
 	Logger *log.Logger
 }
@@ -40,10 +35,11 @@ func Create(ctx context.Context, cfg *Config) error {
 	// Add reflection so that clients can query for available services, methods, etc.
 	reflection.Register(s)
 
-	// Register ReplicaManager server.
-	RegisterReplicaServer(s, &server{})
+	RegisterReplicaSvcServer(s, &server{
+		id: cfg.ID,
+	})
 
-	cfg.Logger.Printf("server listening on %s\n", cfg.Addr)
+	cfg.Logger.Printf("replica server listening on %s\n", cfg.Addr)
 	if err := s.Serve(lis); err != nil {
 		return err
 	}

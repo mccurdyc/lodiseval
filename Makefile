@@ -20,7 +20,7 @@ all: mod-download dev-dependencies tidy fmt fiximports test vet staticcheck ## R
 
 generate: ## Compiles protobufs, generating Go code.
 	@echo "==> Compiling protobufs."
-	@find . -type f -name *.proto | awk -F'[./]' '{system("protoc -I "$$3" --go_out=plugins=grpc:"$$3" "$$4".proto")}'
+	@protoc -I=. --go_out=plugins=grpc,paths=source_relative:. **/*.proto
 .PHONY: generate
 
 build: generate ## Compiles the protobufs and builds the lodiseval binary.
@@ -61,7 +61,7 @@ fiximports: ## Properly formats and orders imports.
 	@goimports -w ${GO_PKG_DIRS_REL}
 .PHONY: fiximports
 
-fmt: ## Properly formats Go files and orders dependencies.
+fmt: fiximports tidy ## Properly formats Go files and orders dependencies.
 	@echo "==> Running gofmt."
 	@gofmt -s -w ${GO_FILES}
 .PHONY: fmt

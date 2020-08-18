@@ -2,13 +2,14 @@
 // versions:
 // 	protoc-gen-go v1.25.0
 // 	protoc        v3.12.3
-// source: replicamanager.proto
+// source: replicamanager/replicamanager.proto
 
 package replicamanager
 
 import (
 	context "context"
 	proto "github.com/golang/protobuf/proto"
+	replica "github.com/mccurdyc/lodiseval/replica"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -46,7 +47,7 @@ type CreateReplicaRequest struct {
 func (x *CreateReplicaRequest) Reset() {
 	*x = CreateReplicaRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_replicamanager_proto_msgTypes[0]
+		mi := &file_replicamanager_replicamanager_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -59,7 +60,7 @@ func (x *CreateReplicaRequest) String() string {
 func (*CreateReplicaRequest) ProtoMessage() {}
 
 func (x *CreateReplicaRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_replicamanager_proto_msgTypes[0]
+	mi := &file_replicamanager_replicamanager_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -72,7 +73,7 @@ func (x *CreateReplicaRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateReplicaRequest.ProtoReflect.Descriptor instead.
 func (*CreateReplicaRequest) Descriptor() ([]byte, []int) {
-	return file_replicamanager_proto_rawDescGZIP(), []int{0}
+	return file_replicamanager_replicamanager_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *CreateReplicaRequest) GetAddress() string {
@@ -114,7 +115,7 @@ type CreateReplicaResponse struct {
 func (x *CreateReplicaResponse) Reset() {
 	*x = CreateReplicaResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_replicamanager_proto_msgTypes[1]
+		mi := &file_replicamanager_replicamanager_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -127,7 +128,7 @@ func (x *CreateReplicaResponse) String() string {
 func (*CreateReplicaResponse) ProtoMessage() {}
 
 func (x *CreateReplicaResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_replicamanager_proto_msgTypes[1]
+	mi := &file_replicamanager_replicamanager_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -140,7 +141,7 @@ func (x *CreateReplicaResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateReplicaResponse.ProtoReflect.Descriptor instead.
 func (*CreateReplicaResponse) Descriptor() ([]byte, []int) {
-	return file_replicamanager_proto_rawDescGZIP(), []int{1}
+	return file_replicamanager_replicamanager_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *CreateReplicaResponse) GetId() string {
@@ -159,7 +160,7 @@ type ListReplicasRequest struct {
 func (x *ListReplicasRequest) Reset() {
 	*x = ListReplicasRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_replicamanager_proto_msgTypes[2]
+		mi := &file_replicamanager_replicamanager_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -172,7 +173,7 @@ func (x *ListReplicasRequest) String() string {
 func (*ListReplicasRequest) ProtoMessage() {}
 
 func (x *ListReplicasRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_replicamanager_proto_msgTypes[2]
+	mi := &file_replicamanager_replicamanager_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -185,7 +186,7 @@ func (x *ListReplicasRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListReplicasRequest.ProtoReflect.Descriptor instead.
 func (*ListReplicasRequest) Descriptor() ([]byte, []int) {
-	return file_replicamanager_proto_rawDescGZIP(), []int{2}
+	return file_replicamanager_replicamanager_proto_rawDescGZIP(), []int{2}
 }
 
 type ListReplicasResponse struct {
@@ -193,13 +194,13 @@ type ListReplicasResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id []string `protobuf:"bytes,1,rep,name=id,proto3" json:"id,omitempty"`
+	Replicas []*replica.Replica `protobuf:"bytes,1,rep,name=replicas,proto3" json:"replicas,omitempty"`
 }
 
 func (x *ListReplicasResponse) Reset() {
 	*x = ListReplicasResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_replicamanager_proto_msgTypes[3]
+		mi := &file_replicamanager_replicamanager_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -212,7 +213,7 @@ func (x *ListReplicasResponse) String() string {
 func (*ListReplicasResponse) ProtoMessage() {}
 
 func (x *ListReplicasResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_replicamanager_proto_msgTypes[3]
+	mi := &file_replicamanager_replicamanager_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -225,12 +226,12 @@ func (x *ListReplicasResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListReplicasResponse.ProtoReflect.Descriptor instead.
 func (*ListReplicasResponse) Descriptor() ([]byte, []int) {
-	return file_replicamanager_proto_rawDescGZIP(), []int{3}
+	return file_replicamanager_replicamanager_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *ListReplicasResponse) GetId() []string {
+func (x *ListReplicasResponse) GetReplicas() []*replica.Replica {
 	if x != nil {
-		return x.Id
+		return x.Replicas
 	}
 	return nil
 }
@@ -246,7 +247,7 @@ type DeleteReplicaRequest struct {
 func (x *DeleteReplicaRequest) Reset() {
 	*x = DeleteReplicaRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_replicamanager_proto_msgTypes[4]
+		mi := &file_replicamanager_replicamanager_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -259,7 +260,7 @@ func (x *DeleteReplicaRequest) String() string {
 func (*DeleteReplicaRequest) ProtoMessage() {}
 
 func (x *DeleteReplicaRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_replicamanager_proto_msgTypes[4]
+	mi := &file_replicamanager_replicamanager_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -272,7 +273,7 @@ func (x *DeleteReplicaRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteReplicaRequest.ProtoReflect.Descriptor instead.
 func (*DeleteReplicaRequest) Descriptor() ([]byte, []int) {
-	return file_replicamanager_proto_rawDescGZIP(), []int{4}
+	return file_replicamanager_replicamanager_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *DeleteReplicaRequest) GetId() string {
@@ -293,7 +294,7 @@ type DeleteReplicaResponse struct {
 func (x *DeleteReplicaResponse) Reset() {
 	*x = DeleteReplicaResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_replicamanager_proto_msgTypes[5]
+		mi := &file_replicamanager_replicamanager_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -306,7 +307,7 @@ func (x *DeleteReplicaResponse) String() string {
 func (*DeleteReplicaResponse) ProtoMessage() {}
 
 func (x *DeleteReplicaResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_replicamanager_proto_msgTypes[5]
+	mi := &file_replicamanager_replicamanager_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -319,7 +320,7 @@ func (x *DeleteReplicaResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteReplicaResponse.ProtoReflect.Descriptor instead.
 func (*DeleteReplicaResponse) Descriptor() ([]byte, []int) {
-	return file_replicamanager_proto_rawDescGZIP(), []int{5}
+	return file_replicamanager_replicamanager_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *DeleteReplicaResponse) GetStatus() string {
@@ -343,7 +344,7 @@ type SetLeaderRequest struct {
 func (x *SetLeaderRequest) Reset() {
 	*x = SetLeaderRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_replicamanager_proto_msgTypes[6]
+		mi := &file_replicamanager_replicamanager_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -356,7 +357,7 @@ func (x *SetLeaderRequest) String() string {
 func (*SetLeaderRequest) ProtoMessage() {}
 
 func (x *SetLeaderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_replicamanager_proto_msgTypes[6]
+	mi := &file_replicamanager_replicamanager_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -369,7 +370,7 @@ func (x *SetLeaderRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetLeaderRequest.ProtoReflect.Descriptor instead.
 func (*SetLeaderRequest) Descriptor() ([]byte, []int) {
-	return file_replicamanager_proto_rawDescGZIP(), []int{6}
+	return file_replicamanager_replicamanager_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *SetLeaderRequest) GetId() string {
@@ -388,7 +389,7 @@ type SetLeaderResponse struct {
 func (x *SetLeaderResponse) Reset() {
 	*x = SetLeaderResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_replicamanager_proto_msgTypes[7]
+		mi := &file_replicamanager_replicamanager_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -401,7 +402,7 @@ func (x *SetLeaderResponse) String() string {
 func (*SetLeaderResponse) ProtoMessage() {}
 
 func (x *SetLeaderResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_replicamanager_proto_msgTypes[7]
+	mi := &file_replicamanager_replicamanager_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -414,7 +415,7 @@ func (x *SetLeaderResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetLeaderResponse.ProtoReflect.Descriptor instead.
 func (*SetLeaderResponse) Descriptor() ([]byte, []int) {
-	return file_replicamanager_proto_rawDescGZIP(), []int{7}
+	return file_replicamanager_replicamanager_proto_rawDescGZIP(), []int{7}
 }
 
 type GetLeaderRequest struct {
@@ -426,7 +427,7 @@ type GetLeaderRequest struct {
 func (x *GetLeaderRequest) Reset() {
 	*x = GetLeaderRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_replicamanager_proto_msgTypes[8]
+		mi := &file_replicamanager_replicamanager_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -439,7 +440,7 @@ func (x *GetLeaderRequest) String() string {
 func (*GetLeaderRequest) ProtoMessage() {}
 
 func (x *GetLeaderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_replicamanager_proto_msgTypes[8]
+	mi := &file_replicamanager_replicamanager_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -452,7 +453,7 @@ func (x *GetLeaderRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetLeaderRequest.ProtoReflect.Descriptor instead.
 func (*GetLeaderRequest) Descriptor() ([]byte, []int) {
-	return file_replicamanager_proto_rawDescGZIP(), []int{8}
+	return file_replicamanager_replicamanager_proto_rawDescGZIP(), []int{8}
 }
 
 type GetLeaderResponse struct {
@@ -466,7 +467,7 @@ type GetLeaderResponse struct {
 func (x *GetLeaderResponse) Reset() {
 	*x = GetLeaderResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_replicamanager_proto_msgTypes[9]
+		mi := &file_replicamanager_replicamanager_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -479,7 +480,7 @@ func (x *GetLeaderResponse) String() string {
 func (*GetLeaderResponse) ProtoMessage() {}
 
 func (x *GetLeaderResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_replicamanager_proto_msgTypes[9]
+	mi := &file_replicamanager_replicamanager_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -492,7 +493,7 @@ func (x *GetLeaderResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetLeaderResponse.ProtoReflect.Descriptor instead.
 func (*GetLeaderResponse) Descriptor() ([]byte, []int) {
-	return file_replicamanager_proto_rawDescGZIP(), []int{9}
+	return file_replicamanager_replicamanager_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GetLeaderResponse) GetId() string {
@@ -517,7 +518,7 @@ type SetRequest struct {
 func (x *SetRequest) Reset() {
 	*x = SetRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_replicamanager_proto_msgTypes[10]
+		mi := &file_replicamanager_replicamanager_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -530,7 +531,7 @@ func (x *SetRequest) String() string {
 func (*SetRequest) ProtoMessage() {}
 
 func (x *SetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_replicamanager_proto_msgTypes[10]
+	mi := &file_replicamanager_replicamanager_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -543,7 +544,7 @@ func (x *SetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetRequest.ProtoReflect.Descriptor instead.
 func (*SetRequest) Descriptor() ([]byte, []int) {
-	return file_replicamanager_proto_rawDescGZIP(), []int{10}
+	return file_replicamanager_replicamanager_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *SetRequest) GetKey() string {
@@ -569,7 +570,7 @@ type SetResponse struct {
 func (x *SetResponse) Reset() {
 	*x = SetResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_replicamanager_proto_msgTypes[11]
+		mi := &file_replicamanager_replicamanager_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -582,7 +583,7 @@ func (x *SetResponse) String() string {
 func (*SetResponse) ProtoMessage() {}
 
 func (x *SetResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_replicamanager_proto_msgTypes[11]
+	mi := &file_replicamanager_replicamanager_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -595,7 +596,7 @@ func (x *SetResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetResponse.ProtoReflect.Descriptor instead.
 func (*SetResponse) Descriptor() ([]byte, []int) {
-	return file_replicamanager_proto_rawDescGZIP(), []int{11}
+	return file_replicamanager_replicamanager_proto_rawDescGZIP(), []int{11}
 }
 
 type GetRequest struct {
@@ -609,7 +610,7 @@ type GetRequest struct {
 func (x *GetRequest) Reset() {
 	*x = GetRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_replicamanager_proto_msgTypes[12]
+		mi := &file_replicamanager_replicamanager_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -622,7 +623,7 @@ func (x *GetRequest) String() string {
 func (*GetRequest) ProtoMessage() {}
 
 func (x *GetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_replicamanager_proto_msgTypes[12]
+	mi := &file_replicamanager_replicamanager_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -635,7 +636,7 @@ func (x *GetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetRequest.ProtoReflect.Descriptor instead.
 func (*GetRequest) Descriptor() ([]byte, []int) {
-	return file_replicamanager_proto_rawDescGZIP(), []int{12}
+	return file_replicamanager_replicamanager_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GetRequest) GetKey() string {
@@ -656,7 +657,7 @@ type GetResponse struct {
 func (x *GetResponse) Reset() {
 	*x = GetResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_replicamanager_proto_msgTypes[13]
+		mi := &file_replicamanager_replicamanager_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -669,7 +670,7 @@ func (x *GetResponse) String() string {
 func (*GetResponse) ProtoMessage() {}
 
 func (x *GetResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_replicamanager_proto_msgTypes[13]
+	mi := &file_replicamanager_replicamanager_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -682,7 +683,7 @@ func (x *GetResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetResponse.ProtoReflect.Descriptor instead.
 func (*GetResponse) Descriptor() ([]byte, []int) {
-	return file_replicamanager_proto_rawDescGZIP(), []int{13}
+	return file_replicamanager_replicamanager_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *GetResponse) GetValue() string {
@@ -706,7 +707,7 @@ type SetAlgorithmRequest struct {
 func (x *SetAlgorithmRequest) Reset() {
 	*x = SetAlgorithmRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_replicamanager_proto_msgTypes[14]
+		mi := &file_replicamanager_replicamanager_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -719,7 +720,7 @@ func (x *SetAlgorithmRequest) String() string {
 func (*SetAlgorithmRequest) ProtoMessage() {}
 
 func (x *SetAlgorithmRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_replicamanager_proto_msgTypes[14]
+	mi := &file_replicamanager_replicamanager_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -732,7 +733,7 @@ func (x *SetAlgorithmRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetAlgorithmRequest.ProtoReflect.Descriptor instead.
 func (*SetAlgorithmRequest) Descriptor() ([]byte, []int) {
-	return file_replicamanager_proto_rawDescGZIP(), []int{14}
+	return file_replicamanager_replicamanager_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *SetAlgorithmRequest) GetAlgorithm() string {
@@ -751,7 +752,7 @@ type SetAlgorithmResponse struct {
 func (x *SetAlgorithmResponse) Reset() {
 	*x = SetAlgorithmResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_replicamanager_proto_msgTypes[15]
+		mi := &file_replicamanager_replicamanager_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -764,7 +765,7 @@ func (x *SetAlgorithmResponse) String() string {
 func (*SetAlgorithmResponse) ProtoMessage() {}
 
 func (x *SetAlgorithmResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_replicamanager_proto_msgTypes[15]
+	mi := &file_replicamanager_replicamanager_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -777,7 +778,7 @@ func (x *SetAlgorithmResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetAlgorithmResponse.ProtoReflect.Descriptor instead.
 func (*SetAlgorithmResponse) Descriptor() ([]byte, []int) {
-	return file_replicamanager_proto_rawDescGZIP(), []int{15}
+	return file_replicamanager_replicamanager_proto_rawDescGZIP(), []int{15}
 }
 
 type GetAlgorithmRequest struct {
@@ -789,7 +790,7 @@ type GetAlgorithmRequest struct {
 func (x *GetAlgorithmRequest) Reset() {
 	*x = GetAlgorithmRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_replicamanager_proto_msgTypes[16]
+		mi := &file_replicamanager_replicamanager_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -802,7 +803,7 @@ func (x *GetAlgorithmRequest) String() string {
 func (*GetAlgorithmRequest) ProtoMessage() {}
 
 func (x *GetAlgorithmRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_replicamanager_proto_msgTypes[16]
+	mi := &file_replicamanager_replicamanager_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -815,7 +816,7 @@ func (x *GetAlgorithmRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAlgorithmRequest.ProtoReflect.Descriptor instead.
 func (*GetAlgorithmRequest) Descriptor() ([]byte, []int) {
-	return file_replicamanager_proto_rawDescGZIP(), []int{16}
+	return file_replicamanager_replicamanager_proto_rawDescGZIP(), []int{16}
 }
 
 type GetAlgorithmResponse struct {
@@ -829,7 +830,7 @@ type GetAlgorithmResponse struct {
 func (x *GetAlgorithmResponse) Reset() {
 	*x = GetAlgorithmResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_replicamanager_proto_msgTypes[17]
+		mi := &file_replicamanager_replicamanager_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -842,7 +843,7 @@ func (x *GetAlgorithmResponse) String() string {
 func (*GetAlgorithmResponse) ProtoMessage() {}
 
 func (x *GetAlgorithmResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_replicamanager_proto_msgTypes[17]
+	mi := &file_replicamanager_replicamanager_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -855,7 +856,7 @@ func (x *GetAlgorithmResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAlgorithmResponse.ProtoReflect.Descriptor instead.
 func (*GetAlgorithmResponse) Descriptor() ([]byte, []int) {
-	return file_replicamanager_proto_rawDescGZIP(), []int{17}
+	return file_replicamanager_replicamanager_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *GetAlgorithmResponse) GetAlgorithm() string {
@@ -865,124 +866,131 @@ func (x *GetAlgorithmResponse) GetAlgorithm() string {
 	return ""
 }
 
-var File_replicamanager_proto protoreflect.FileDescriptor
+var File_replicamanager_replicamanager_proto protoreflect.FileDescriptor
 
-var file_replicamanager_proto_rawDesc = []byte{
-	0x0a, 0x14, 0x72, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72,
-	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x0e, 0x72, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d,
-	0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x22, 0x90, 0x01, 0x0a, 0x14, 0x43, 0x72, 0x65, 0x61, 0x74,
-	0x65, 0x52, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
-	0x18, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x1c, 0x0a, 0x09, 0x61, 0x6c, 0x67,
-	0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x6c,
-	0x67, 0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d, 0x12, 0x14, 0x0a, 0x05, 0x73, 0x74, 0x6f, 0x72, 0x65,
-	0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x12, 0x2a, 0x0a,
-	0x11, 0x73, 0x79, 0x6e, 0x63, 0x5f, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x76, 0x61, 0x6c, 0x5f, 0x73,
-	0x65, 0x63, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x0f, 0x73, 0x79, 0x6e, 0x63, 0x49, 0x6e,
-	0x74, 0x65, 0x72, 0x76, 0x61, 0x6c, 0x53, 0x65, 0x63, 0x22, 0x27, 0x0a, 0x15, 0x43, 0x72, 0x65,
-	0x61, 0x74, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x73, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02,
-	0x69, 0x64, 0x22, 0x15, 0x0a, 0x13, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x69, 0x63,
-	0x61, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x26, 0x0a, 0x14, 0x4c, 0x69, 0x73,
-	0x74, 0x52, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x52, 0x02, 0x69,
-	0x64, 0x22, 0x26, 0x0a, 0x14, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x69,
-	0x63, 0x61, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x2f, 0x0a, 0x15, 0x44, 0x65, 0x6c,
-	0x65, 0x74, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x73, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x22, 0x22, 0x0a, 0x10, 0x53, 0x65,
-	0x74, 0x4c, 0x65, 0x61, 0x64, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e,
-	0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x13,
-	0x0a, 0x11, 0x53, 0x65, 0x74, 0x4c, 0x65, 0x61, 0x64, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f,
-	0x6e, 0x73, 0x65, 0x22, 0x12, 0x0a, 0x10, 0x47, 0x65, 0x74, 0x4c, 0x65, 0x61, 0x64, 0x65, 0x72,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x23, 0x0a, 0x11, 0x47, 0x65, 0x74, 0x4c, 0x65,
-	0x61, 0x64, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x0e, 0x0a, 0x02,
-	0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x34, 0x0a, 0x0a,
-	0x53, 0x65, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65,
-	0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05,
-	0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c,
-	0x75, 0x65, 0x22, 0x0d, 0x0a, 0x0b, 0x53, 0x65, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x22, 0x1e, 0x0a, 0x0a, 0x47, 0x65, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
-	0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65,
-	0x79, 0x22, 0x23, 0x0a, 0x0b, 0x47, 0x65, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
-	0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x33, 0x0a, 0x13, 0x53, 0x65, 0x74, 0x41, 0x6c, 0x67,
-	0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1c, 0x0a,
-	0x09, 0x61, 0x6c, 0x67, 0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x09, 0x61, 0x6c, 0x67, 0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d, 0x22, 0x16, 0x0a, 0x14, 0x53,
-	0x65, 0x74, 0x41, 0x6c, 0x67, 0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f,
-	0x6e, 0x73, 0x65, 0x22, 0x15, 0x0a, 0x13, 0x47, 0x65, 0x74, 0x41, 0x6c, 0x67, 0x6f, 0x72, 0x69,
-	0x74, 0x68, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x34, 0x0a, 0x14, 0x47, 0x65,
-	0x74, 0x41, 0x6c, 0x67, 0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x73, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x61, 0x6c, 0x67, 0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x6c, 0x67, 0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d,
-	0x32, 0x81, 0x06, 0x0a, 0x0e, 0x52, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x4d, 0x61, 0x6e, 0x61,
-	0x67, 0x65, 0x72, 0x12, 0x5c, 0x0a, 0x0d, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x70,
+var file_replicamanager_replicamanager_proto_rawDesc = []byte{
+	0x0a, 0x23, 0x72, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72,
+	0x2f, 0x72, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x0e, 0x72, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d, 0x61,
+	0x6e, 0x61, 0x67, 0x65, 0x72, 0x1a, 0x15, 0x72, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x2f, 0x72,
+	0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x90, 0x01, 0x0a,
+	0x14, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12,
+	0x1c, 0x0a, 0x09, 0x61, 0x6c, 0x67, 0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x09, 0x61, 0x6c, 0x67, 0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d, 0x12, 0x14, 0x0a,
+	0x05, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x73, 0x74,
+	0x6f, 0x72, 0x65, 0x12, 0x2a, 0x0a, 0x11, 0x73, 0x79, 0x6e, 0x63, 0x5f, 0x69, 0x6e, 0x74, 0x65,
+	0x72, 0x76, 0x61, 0x6c, 0x5f, 0x73, 0x65, 0x63, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x0f,
+	0x73, 0x79, 0x6e, 0x63, 0x49, 0x6e, 0x74, 0x65, 0x72, 0x76, 0x61, 0x6c, 0x53, 0x65, 0x63, 0x22,
+	0x27, 0x0a, 0x15, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x15, 0x0a, 0x13, 0x4c, 0x69, 0x73, 0x74,
+	0x52, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22,
+	0x44, 0x0a, 0x14, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x73, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2c, 0x0a, 0x08, 0x72, 0x65, 0x70, 0x6c, 0x69,
+	0x63, 0x61, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x72, 0x65, 0x70, 0x6c,
+	0x69, 0x63, 0x61, 0x2e, 0x52, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x52, 0x08, 0x72, 0x65, 0x70,
+	0x6c, 0x69, 0x63, 0x61, 0x73, 0x22, 0x26, 0x0a, 0x14, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52,
+	0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a,
+	0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x2f, 0x0a,
+	0x15, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x22, 0x22,
+	0x0a, 0x10, 0x53, 0x65, 0x74, 0x4c, 0x65, 0x61, 0x64, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02,
+	0x69, 0x64, 0x22, 0x13, 0x0a, 0x11, 0x53, 0x65, 0x74, 0x4c, 0x65, 0x61, 0x64, 0x65, 0x72, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x12, 0x0a, 0x10, 0x47, 0x65, 0x74, 0x4c, 0x65,
+	0x61, 0x64, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x23, 0x0a, 0x11, 0x47,
+	0x65, 0x74, 0x4c, 0x65, 0x61, 0x64, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64,
+	0x22, 0x34, 0x0a, 0x0a, 0x53, 0x65, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x10,
+	0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79,
+	0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x0d, 0x0a, 0x0b, 0x53, 0x65, 0x74, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x1e, 0x0a, 0x0a, 0x47, 0x65, 0x74, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x03, 0x6b, 0x65, 0x79, 0x22, 0x23, 0x0a, 0x0b, 0x47, 0x65, 0x74, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x33, 0x0a, 0x13, 0x53, 0x65,
+	0x74, 0x41, 0x6c, 0x67, 0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x12, 0x1c, 0x0a, 0x09, 0x61, 0x6c, 0x67, 0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x6c, 0x67, 0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d, 0x22,
+	0x16, 0x0a, 0x14, 0x53, 0x65, 0x74, 0x41, 0x6c, 0x67, 0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x15, 0x0a, 0x13, 0x47, 0x65, 0x74, 0x41, 0x6c,
+	0x67, 0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x34,
+	0x0a, 0x14, 0x47, 0x65, 0x74, 0x41, 0x6c, 0x67, 0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x61, 0x6c, 0x67, 0x6f, 0x72, 0x69,
+	0x74, 0x68, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x6c, 0x67, 0x6f, 0x72,
+	0x69, 0x74, 0x68, 0x6d, 0x32, 0x84, 0x06, 0x0a, 0x11, 0x52, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61,
+	0x4d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x53, 0x76, 0x63, 0x12, 0x5c, 0x0a, 0x0d, 0x43, 0x72,
+	0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x12, 0x24, 0x2e, 0x72, 0x65,
+	0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e, 0x43, 0x72, 0x65,
+	0x61, 0x74, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x25, 0x2e, 0x72, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67,
+	0x65, 0x72, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x59, 0x0a, 0x0c, 0x4c, 0x69, 0x73, 0x74,
+	0x52, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x73, 0x12, 0x23, 0x2e, 0x72, 0x65, 0x70, 0x6c, 0x69,
+	0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65,
+	0x70, 0x6c, 0x69, 0x63, 0x61, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x24, 0x2e,
+	0x72, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e, 0x4c,
+	0x69, 0x73, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x5c, 0x0a, 0x0d, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x70,
 	0x6c, 0x69, 0x63, 0x61, 0x12, 0x24, 0x2e, 0x72, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d, 0x61,
-	0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x70, 0x6c,
+	0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x70, 0x6c,
 	0x69, 0x63, 0x61, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x25, 0x2e, 0x72, 0x65, 0x70,
-	0x6c, 0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e, 0x43, 0x72, 0x65, 0x61,
+	0x6c, 0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e, 0x44, 0x65, 0x6c, 0x65,
 	0x74, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x12, 0x59, 0x0a, 0x0c, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61,
-	0x73, 0x12, 0x23, 0x2e, 0x72, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67,
-	0x65, 0x72, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x73, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x24, 0x2e, 0x72, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61,
-	0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x70, 0x6c,
-	0x69, 0x63, 0x61, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x5c, 0x0a, 0x0d,
-	0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x12, 0x24, 0x2e,
-	0x72, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e, 0x44,
-	0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x1a, 0x25, 0x2e, 0x72, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e,
-	0x61, 0x67, 0x65, 0x72, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x69,
-	0x63, 0x61, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x50, 0x0a, 0x09, 0x53, 0x65,
-	0x74, 0x4c, 0x65, 0x61, 0x64, 0x65, 0x72, 0x12, 0x20, 0x2e, 0x72, 0x65, 0x70, 0x6c, 0x69, 0x63,
-	0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e, 0x53, 0x65, 0x74, 0x4c, 0x65, 0x61, 0x64,
-	0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x72, 0x65, 0x70, 0x6c,
-	0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e, 0x53, 0x65, 0x74, 0x4c, 0x65,
-	0x61, 0x64, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x50, 0x0a, 0x09,
-	0x47, 0x65, 0x74, 0x4c, 0x65, 0x61, 0x64, 0x65, 0x72, 0x12, 0x20, 0x2e, 0x72, 0x65, 0x70, 0x6c,
-	0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e, 0x47, 0x65, 0x74, 0x4c, 0x65,
-	0x61, 0x64, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x72, 0x65,
-	0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e, 0x47, 0x65, 0x74,
-	0x4c, 0x65, 0x61, 0x64, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3e,
-	0x0a, 0x03, 0x53, 0x65, 0x74, 0x12, 0x1a, 0x2e, 0x72, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d,
-	0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e, 0x53, 0x65, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x1a, 0x1b, 0x2e, 0x72, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67,
-	0x65, 0x72, 0x2e, 0x53, 0x65, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3e,
-	0x0a, 0x03, 0x47, 0x65, 0x74, 0x12, 0x1a, 0x2e, 0x72, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d,
-	0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e, 0x47, 0x65, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x1a, 0x1b, 0x2e, 0x72, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67,
-	0x65, 0x72, 0x2e, 0x47, 0x65, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x59,
-	0x0a, 0x0c, 0x53, 0x65, 0x74, 0x41, 0x6c, 0x67, 0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d, 0x12, 0x23,
+	0x65, 0x12, 0x50, 0x0a, 0x09, 0x53, 0x65, 0x74, 0x4c, 0x65, 0x61, 0x64, 0x65, 0x72, 0x12, 0x20,
 	0x2e, 0x72, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e,
-	0x53, 0x65, 0x74, 0x41, 0x6c, 0x67, 0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x1a, 0x24, 0x2e, 0x72, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e,
-	0x61, 0x67, 0x65, 0x72, 0x2e, 0x53, 0x65, 0x74, 0x41, 0x6c, 0x67, 0x6f, 0x72, 0x69, 0x74, 0x68,
-	0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x59, 0x0a, 0x0c, 0x47, 0x65, 0x74,
-	0x41, 0x6c, 0x67, 0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d, 0x12, 0x23, 0x2e, 0x72, 0x65, 0x70, 0x6c,
-	0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e, 0x47, 0x65, 0x74, 0x41, 0x6c,
-	0x67, 0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x24,
-	0x2e, 0x72, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e,
-	0x47, 0x65, 0x74, 0x41, 0x6c, 0x67, 0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x42, 0x12, 0x5a, 0x10, 0x2e, 0x3b, 0x72, 0x65, 0x70, 0x6c, 0x69, 0x63,
-	0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x53, 0x65, 0x74, 0x4c, 0x65, 0x61, 0x64, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x21, 0x2e, 0x72, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65,
+	0x72, 0x2e, 0x53, 0x65, 0x74, 0x4c, 0x65, 0x61, 0x64, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x50, 0x0a, 0x09, 0x47, 0x65, 0x74, 0x4c, 0x65, 0x61, 0x64, 0x65, 0x72,
+	0x12, 0x20, 0x2e, 0x72, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65,
+	0x72, 0x2e, 0x47, 0x65, 0x74, 0x4c, 0x65, 0x61, 0x64, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x1a, 0x21, 0x2e, 0x72, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61,
+	0x67, 0x65, 0x72, 0x2e, 0x47, 0x65, 0x74, 0x4c, 0x65, 0x61, 0x64, 0x65, 0x72, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3e, 0x0a, 0x03, 0x53, 0x65, 0x74, 0x12, 0x1a, 0x2e, 0x72,
+	0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e, 0x53, 0x65,
+	0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1b, 0x2e, 0x72, 0x65, 0x70, 0x6c, 0x69,
+	0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e, 0x53, 0x65, 0x74, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3e, 0x0a, 0x03, 0x47, 0x65, 0x74, 0x12, 0x1a, 0x2e, 0x72,
+	0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e, 0x47, 0x65,
+	0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1b, 0x2e, 0x72, 0x65, 0x70, 0x6c, 0x69,
+	0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e, 0x47, 0x65, 0x74, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x59, 0x0a, 0x0c, 0x53, 0x65, 0x74, 0x41, 0x6c, 0x67, 0x6f,
+	0x72, 0x69, 0x74, 0x68, 0x6d, 0x12, 0x23, 0x2e, 0x72, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d,
+	0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e, 0x53, 0x65, 0x74, 0x41, 0x6c, 0x67, 0x6f, 0x72, 0x69,
+	0x74, 0x68, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x24, 0x2e, 0x72, 0x65, 0x70,
+	0x6c, 0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e, 0x53, 0x65, 0x74, 0x41,
+	0x6c, 0x67, 0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x12, 0x59, 0x0a, 0x0c, 0x47, 0x65, 0x74, 0x41, 0x6c, 0x67, 0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d,
+	0x12, 0x23, 0x2e, 0x72, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65,
+	0x72, 0x2e, 0x47, 0x65, 0x74, 0x41, 0x6c, 0x67, 0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x24, 0x2e, 0x72, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x6d,
+	0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x2e, 0x47, 0x65, 0x74, 0x41, 0x6c, 0x67, 0x6f, 0x72, 0x69,
+	0x74, 0x68, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x2e, 0x5a, 0x2c, 0x67,
+	0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6d, 0x63, 0x63, 0x75, 0x72, 0x64,
+	0x79, 0x63, 0x2f, 0x6c, 0x6f, 0x64, 0x69, 0x73, 0x65, 0x76, 0x61, 0x6c, 0x2f, 0x72, 0x65, 0x70,
+	0x6c, 0x69, 0x63, 0x61, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
-	file_replicamanager_proto_rawDescOnce sync.Once
-	file_replicamanager_proto_rawDescData = file_replicamanager_proto_rawDesc
+	file_replicamanager_replicamanager_proto_rawDescOnce sync.Once
+	file_replicamanager_replicamanager_proto_rawDescData = file_replicamanager_replicamanager_proto_rawDesc
 )
 
-func file_replicamanager_proto_rawDescGZIP() []byte {
-	file_replicamanager_proto_rawDescOnce.Do(func() {
-		file_replicamanager_proto_rawDescData = protoimpl.X.CompressGZIP(file_replicamanager_proto_rawDescData)
+func file_replicamanager_replicamanager_proto_rawDescGZIP() []byte {
+	file_replicamanager_replicamanager_proto_rawDescOnce.Do(func() {
+		file_replicamanager_replicamanager_proto_rawDescData = protoimpl.X.CompressGZIP(file_replicamanager_replicamanager_proto_rawDescData)
 	})
-	return file_replicamanager_proto_rawDescData
+	return file_replicamanager_replicamanager_proto_rawDescData
 }
 
-var file_replicamanager_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
-var file_replicamanager_proto_goTypes = []interface{}{
+var file_replicamanager_replicamanager_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
+var file_replicamanager_replicamanager_proto_goTypes = []interface{}{
 	(*CreateReplicaRequest)(nil),  // 0: replicamanager.CreateReplicaRequest
 	(*CreateReplicaResponse)(nil), // 1: replicamanager.CreateReplicaResponse
 	(*ListReplicasRequest)(nil),   // 2: replicamanager.ListReplicasRequest
@@ -1001,40 +1009,42 @@ var file_replicamanager_proto_goTypes = []interface{}{
 	(*SetAlgorithmResponse)(nil),  // 15: replicamanager.SetAlgorithmResponse
 	(*GetAlgorithmRequest)(nil),   // 16: replicamanager.GetAlgorithmRequest
 	(*GetAlgorithmResponse)(nil),  // 17: replicamanager.GetAlgorithmResponse
+	(*replica.Replica)(nil),       // 18: replica.Replica
 }
-var file_replicamanager_proto_depIdxs = []int32{
-	0,  // 0: replicamanager.ReplicaManager.CreateReplica:input_type -> replicamanager.CreateReplicaRequest
-	2,  // 1: replicamanager.ReplicaManager.ListReplicas:input_type -> replicamanager.ListReplicasRequest
-	4,  // 2: replicamanager.ReplicaManager.DeleteReplica:input_type -> replicamanager.DeleteReplicaRequest
-	6,  // 3: replicamanager.ReplicaManager.SetLeader:input_type -> replicamanager.SetLeaderRequest
-	8,  // 4: replicamanager.ReplicaManager.GetLeader:input_type -> replicamanager.GetLeaderRequest
-	10, // 5: replicamanager.ReplicaManager.Set:input_type -> replicamanager.SetRequest
-	12, // 6: replicamanager.ReplicaManager.Get:input_type -> replicamanager.GetRequest
-	14, // 7: replicamanager.ReplicaManager.SetAlgorithm:input_type -> replicamanager.SetAlgorithmRequest
-	16, // 8: replicamanager.ReplicaManager.GetAlgorithm:input_type -> replicamanager.GetAlgorithmRequest
-	1,  // 9: replicamanager.ReplicaManager.CreateReplica:output_type -> replicamanager.CreateReplicaResponse
-	3,  // 10: replicamanager.ReplicaManager.ListReplicas:output_type -> replicamanager.ListReplicasResponse
-	5,  // 11: replicamanager.ReplicaManager.DeleteReplica:output_type -> replicamanager.DeleteReplicaResponse
-	7,  // 12: replicamanager.ReplicaManager.SetLeader:output_type -> replicamanager.SetLeaderResponse
-	9,  // 13: replicamanager.ReplicaManager.GetLeader:output_type -> replicamanager.GetLeaderResponse
-	11, // 14: replicamanager.ReplicaManager.Set:output_type -> replicamanager.SetResponse
-	13, // 15: replicamanager.ReplicaManager.Get:output_type -> replicamanager.GetResponse
-	15, // 16: replicamanager.ReplicaManager.SetAlgorithm:output_type -> replicamanager.SetAlgorithmResponse
-	17, // 17: replicamanager.ReplicaManager.GetAlgorithm:output_type -> replicamanager.GetAlgorithmResponse
-	9,  // [9:18] is the sub-list for method output_type
-	0,  // [0:9] is the sub-list for method input_type
-	0,  // [0:0] is the sub-list for extension type_name
-	0,  // [0:0] is the sub-list for extension extendee
-	0,  // [0:0] is the sub-list for field type_name
+var file_replicamanager_replicamanager_proto_depIdxs = []int32{
+	18, // 0: replicamanager.ListReplicasResponse.replicas:type_name -> replica.Replica
+	0,  // 1: replicamanager.ReplicaManagerSvc.CreateReplica:input_type -> replicamanager.CreateReplicaRequest
+	2,  // 2: replicamanager.ReplicaManagerSvc.ListReplicas:input_type -> replicamanager.ListReplicasRequest
+	4,  // 3: replicamanager.ReplicaManagerSvc.DeleteReplica:input_type -> replicamanager.DeleteReplicaRequest
+	6,  // 4: replicamanager.ReplicaManagerSvc.SetLeader:input_type -> replicamanager.SetLeaderRequest
+	8,  // 5: replicamanager.ReplicaManagerSvc.GetLeader:input_type -> replicamanager.GetLeaderRequest
+	10, // 6: replicamanager.ReplicaManagerSvc.Set:input_type -> replicamanager.SetRequest
+	12, // 7: replicamanager.ReplicaManagerSvc.Get:input_type -> replicamanager.GetRequest
+	14, // 8: replicamanager.ReplicaManagerSvc.SetAlgorithm:input_type -> replicamanager.SetAlgorithmRequest
+	16, // 9: replicamanager.ReplicaManagerSvc.GetAlgorithm:input_type -> replicamanager.GetAlgorithmRequest
+	1,  // 10: replicamanager.ReplicaManagerSvc.CreateReplica:output_type -> replicamanager.CreateReplicaResponse
+	3,  // 11: replicamanager.ReplicaManagerSvc.ListReplicas:output_type -> replicamanager.ListReplicasResponse
+	5,  // 12: replicamanager.ReplicaManagerSvc.DeleteReplica:output_type -> replicamanager.DeleteReplicaResponse
+	7,  // 13: replicamanager.ReplicaManagerSvc.SetLeader:output_type -> replicamanager.SetLeaderResponse
+	9,  // 14: replicamanager.ReplicaManagerSvc.GetLeader:output_type -> replicamanager.GetLeaderResponse
+	11, // 15: replicamanager.ReplicaManagerSvc.Set:output_type -> replicamanager.SetResponse
+	13, // 16: replicamanager.ReplicaManagerSvc.Get:output_type -> replicamanager.GetResponse
+	15, // 17: replicamanager.ReplicaManagerSvc.SetAlgorithm:output_type -> replicamanager.SetAlgorithmResponse
+	17, // 18: replicamanager.ReplicaManagerSvc.GetAlgorithm:output_type -> replicamanager.GetAlgorithmResponse
+	10, // [10:19] is the sub-list for method output_type
+	1,  // [1:10] is the sub-list for method input_type
+	1,  // [1:1] is the sub-list for extension type_name
+	1,  // [1:1] is the sub-list for extension extendee
+	0,  // [0:1] is the sub-list for field type_name
 }
 
-func init() { file_replicamanager_proto_init() }
-func file_replicamanager_proto_init() {
-	if File_replicamanager_proto != nil {
+func init() { file_replicamanager_replicamanager_proto_init() }
+func file_replicamanager_replicamanager_proto_init() {
+	if File_replicamanager_replicamanager_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_replicamanager_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_replicamanager_replicamanager_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CreateReplicaRequest); i {
 			case 0:
 				return &v.state
@@ -1046,7 +1056,7 @@ func file_replicamanager_proto_init() {
 				return nil
 			}
 		}
-		file_replicamanager_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+		file_replicamanager_replicamanager_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CreateReplicaResponse); i {
 			case 0:
 				return &v.state
@@ -1058,7 +1068,7 @@ func file_replicamanager_proto_init() {
 				return nil
 			}
 		}
-		file_replicamanager_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+		file_replicamanager_replicamanager_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListReplicasRequest); i {
 			case 0:
 				return &v.state
@@ -1070,7 +1080,7 @@ func file_replicamanager_proto_init() {
 				return nil
 			}
 		}
-		file_replicamanager_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+		file_replicamanager_replicamanager_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListReplicasResponse); i {
 			case 0:
 				return &v.state
@@ -1082,7 +1092,7 @@ func file_replicamanager_proto_init() {
 				return nil
 			}
 		}
-		file_replicamanager_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+		file_replicamanager_replicamanager_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteReplicaRequest); i {
 			case 0:
 				return &v.state
@@ -1094,7 +1104,7 @@ func file_replicamanager_proto_init() {
 				return nil
 			}
 		}
-		file_replicamanager_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+		file_replicamanager_replicamanager_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteReplicaResponse); i {
 			case 0:
 				return &v.state
@@ -1106,7 +1116,7 @@ func file_replicamanager_proto_init() {
 				return nil
 			}
 		}
-		file_replicamanager_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+		file_replicamanager_replicamanager_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SetLeaderRequest); i {
 			case 0:
 				return &v.state
@@ -1118,7 +1128,7 @@ func file_replicamanager_proto_init() {
 				return nil
 			}
 		}
-		file_replicamanager_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+		file_replicamanager_replicamanager_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SetLeaderResponse); i {
 			case 0:
 				return &v.state
@@ -1130,7 +1140,7 @@ func file_replicamanager_proto_init() {
 				return nil
 			}
 		}
-		file_replicamanager_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+		file_replicamanager_replicamanager_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetLeaderRequest); i {
 			case 0:
 				return &v.state
@@ -1142,7 +1152,7 @@ func file_replicamanager_proto_init() {
 				return nil
 			}
 		}
-		file_replicamanager_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+		file_replicamanager_replicamanager_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetLeaderResponse); i {
 			case 0:
 				return &v.state
@@ -1154,7 +1164,7 @@ func file_replicamanager_proto_init() {
 				return nil
 			}
 		}
-		file_replicamanager_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+		file_replicamanager_replicamanager_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SetRequest); i {
 			case 0:
 				return &v.state
@@ -1166,7 +1176,7 @@ func file_replicamanager_proto_init() {
 				return nil
 			}
 		}
-		file_replicamanager_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+		file_replicamanager_replicamanager_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SetResponse); i {
 			case 0:
 				return &v.state
@@ -1178,7 +1188,7 @@ func file_replicamanager_proto_init() {
 				return nil
 			}
 		}
-		file_replicamanager_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+		file_replicamanager_replicamanager_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetRequest); i {
 			case 0:
 				return &v.state
@@ -1190,7 +1200,7 @@ func file_replicamanager_proto_init() {
 				return nil
 			}
 		}
-		file_replicamanager_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+		file_replicamanager_replicamanager_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetResponse); i {
 			case 0:
 				return &v.state
@@ -1202,7 +1212,7 @@ func file_replicamanager_proto_init() {
 				return nil
 			}
 		}
-		file_replicamanager_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
+		file_replicamanager_replicamanager_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SetAlgorithmRequest); i {
 			case 0:
 				return &v.state
@@ -1214,7 +1224,7 @@ func file_replicamanager_proto_init() {
 				return nil
 			}
 		}
-		file_replicamanager_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+		file_replicamanager_replicamanager_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SetAlgorithmResponse); i {
 			case 0:
 				return &v.state
@@ -1226,7 +1236,7 @@ func file_replicamanager_proto_init() {
 				return nil
 			}
 		}
-		file_replicamanager_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
+		file_replicamanager_replicamanager_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetAlgorithmRequest); i {
 			case 0:
 				return &v.state
@@ -1238,7 +1248,7 @@ func file_replicamanager_proto_init() {
 				return nil
 			}
 		}
-		file_replicamanager_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
+		file_replicamanager_replicamanager_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetAlgorithmResponse); i {
 			case 0:
 				return &v.state
@@ -1255,20 +1265,20 @@ func file_replicamanager_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_replicamanager_proto_rawDesc,
+			RawDescriptor: file_replicamanager_replicamanager_proto_rawDesc,
 			NumEnums:      0,
 			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_replicamanager_proto_goTypes,
-		DependencyIndexes: file_replicamanager_proto_depIdxs,
-		MessageInfos:      file_replicamanager_proto_msgTypes,
+		GoTypes:           file_replicamanager_replicamanager_proto_goTypes,
+		DependencyIndexes: file_replicamanager_replicamanager_proto_depIdxs,
+		MessageInfos:      file_replicamanager_replicamanager_proto_msgTypes,
 	}.Build()
-	File_replicamanager_proto = out.File
-	file_replicamanager_proto_rawDesc = nil
-	file_replicamanager_proto_goTypes = nil
-	file_replicamanager_proto_depIdxs = nil
+	File_replicamanager_replicamanager_proto = out.File
+	file_replicamanager_replicamanager_proto_rawDesc = nil
+	file_replicamanager_replicamanager_proto_goTypes = nil
+	file_replicamanager_replicamanager_proto_depIdxs = nil
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -1279,10 +1289,10 @@ var _ grpc.ClientConnInterface
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion6
 
-// ReplicaManagerClient is the client API for ReplicaManager service.
+// ReplicaManagerSvcClient is the client API for ReplicaManagerSvc service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type ReplicaManagerClient interface {
+type ReplicaManagerSvcClient interface {
 	// =====================================================
 	// Replica Management.
 	// =====================================================
@@ -1306,97 +1316,97 @@ type ReplicaManagerClient interface {
 	GetAlgorithm(ctx context.Context, in *GetAlgorithmRequest, opts ...grpc.CallOption) (*GetAlgorithmResponse, error)
 }
 
-type replicaManagerClient struct {
+type replicaManagerSvcClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewReplicaManagerClient(cc grpc.ClientConnInterface) ReplicaManagerClient {
-	return &replicaManagerClient{cc}
+func NewReplicaManagerSvcClient(cc grpc.ClientConnInterface) ReplicaManagerSvcClient {
+	return &replicaManagerSvcClient{cc}
 }
 
-func (c *replicaManagerClient) CreateReplica(ctx context.Context, in *CreateReplicaRequest, opts ...grpc.CallOption) (*CreateReplicaResponse, error) {
+func (c *replicaManagerSvcClient) CreateReplica(ctx context.Context, in *CreateReplicaRequest, opts ...grpc.CallOption) (*CreateReplicaResponse, error) {
 	out := new(CreateReplicaResponse)
-	err := c.cc.Invoke(ctx, "/replicamanager.ReplicaManager/CreateReplica", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/replicamanager.ReplicaManagerSvc/CreateReplica", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *replicaManagerClient) ListReplicas(ctx context.Context, in *ListReplicasRequest, opts ...grpc.CallOption) (*ListReplicasResponse, error) {
+func (c *replicaManagerSvcClient) ListReplicas(ctx context.Context, in *ListReplicasRequest, opts ...grpc.CallOption) (*ListReplicasResponse, error) {
 	out := new(ListReplicasResponse)
-	err := c.cc.Invoke(ctx, "/replicamanager.ReplicaManager/ListReplicas", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/replicamanager.ReplicaManagerSvc/ListReplicas", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *replicaManagerClient) DeleteReplica(ctx context.Context, in *DeleteReplicaRequest, opts ...grpc.CallOption) (*DeleteReplicaResponse, error) {
+func (c *replicaManagerSvcClient) DeleteReplica(ctx context.Context, in *DeleteReplicaRequest, opts ...grpc.CallOption) (*DeleteReplicaResponse, error) {
 	out := new(DeleteReplicaResponse)
-	err := c.cc.Invoke(ctx, "/replicamanager.ReplicaManager/DeleteReplica", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/replicamanager.ReplicaManagerSvc/DeleteReplica", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *replicaManagerClient) SetLeader(ctx context.Context, in *SetLeaderRequest, opts ...grpc.CallOption) (*SetLeaderResponse, error) {
+func (c *replicaManagerSvcClient) SetLeader(ctx context.Context, in *SetLeaderRequest, opts ...grpc.CallOption) (*SetLeaderResponse, error) {
 	out := new(SetLeaderResponse)
-	err := c.cc.Invoke(ctx, "/replicamanager.ReplicaManager/SetLeader", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/replicamanager.ReplicaManagerSvc/SetLeader", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *replicaManagerClient) GetLeader(ctx context.Context, in *GetLeaderRequest, opts ...grpc.CallOption) (*GetLeaderResponse, error) {
+func (c *replicaManagerSvcClient) GetLeader(ctx context.Context, in *GetLeaderRequest, opts ...grpc.CallOption) (*GetLeaderResponse, error) {
 	out := new(GetLeaderResponse)
-	err := c.cc.Invoke(ctx, "/replicamanager.ReplicaManager/GetLeader", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/replicamanager.ReplicaManagerSvc/GetLeader", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *replicaManagerClient) Set(ctx context.Context, in *SetRequest, opts ...grpc.CallOption) (*SetResponse, error) {
+func (c *replicaManagerSvcClient) Set(ctx context.Context, in *SetRequest, opts ...grpc.CallOption) (*SetResponse, error) {
 	out := new(SetResponse)
-	err := c.cc.Invoke(ctx, "/replicamanager.ReplicaManager/Set", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/replicamanager.ReplicaManagerSvc/Set", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *replicaManagerClient) Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error) {
+func (c *replicaManagerSvcClient) Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error) {
 	out := new(GetResponse)
-	err := c.cc.Invoke(ctx, "/replicamanager.ReplicaManager/Get", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/replicamanager.ReplicaManagerSvc/Get", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *replicaManagerClient) SetAlgorithm(ctx context.Context, in *SetAlgorithmRequest, opts ...grpc.CallOption) (*SetAlgorithmResponse, error) {
+func (c *replicaManagerSvcClient) SetAlgorithm(ctx context.Context, in *SetAlgorithmRequest, opts ...grpc.CallOption) (*SetAlgorithmResponse, error) {
 	out := new(SetAlgorithmResponse)
-	err := c.cc.Invoke(ctx, "/replicamanager.ReplicaManager/SetAlgorithm", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/replicamanager.ReplicaManagerSvc/SetAlgorithm", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *replicaManagerClient) GetAlgorithm(ctx context.Context, in *GetAlgorithmRequest, opts ...grpc.CallOption) (*GetAlgorithmResponse, error) {
+func (c *replicaManagerSvcClient) GetAlgorithm(ctx context.Context, in *GetAlgorithmRequest, opts ...grpc.CallOption) (*GetAlgorithmResponse, error) {
 	out := new(GetAlgorithmResponse)
-	err := c.cc.Invoke(ctx, "/replicamanager.ReplicaManager/GetAlgorithm", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/replicamanager.ReplicaManagerSvc/GetAlgorithm", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ReplicaManagerServer is the server API for ReplicaManager service.
-type ReplicaManagerServer interface {
+// ReplicaManagerSvcServer is the server API for ReplicaManagerSvc service.
+type ReplicaManagerSvcServer interface {
 	// =====================================================
 	// Replica Management.
 	// =====================================================
@@ -1420,245 +1430,245 @@ type ReplicaManagerServer interface {
 	GetAlgorithm(context.Context, *GetAlgorithmRequest) (*GetAlgorithmResponse, error)
 }
 
-// UnimplementedReplicaManagerServer can be embedded to have forward compatible implementations.
-type UnimplementedReplicaManagerServer struct {
+// UnimplementedReplicaManagerSvcServer can be embedded to have forward compatible implementations.
+type UnimplementedReplicaManagerSvcServer struct {
 }
 
-func (*UnimplementedReplicaManagerServer) CreateReplica(context.Context, *CreateReplicaRequest) (*CreateReplicaResponse, error) {
+func (*UnimplementedReplicaManagerSvcServer) CreateReplica(context.Context, *CreateReplicaRequest) (*CreateReplicaResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateReplica not implemented")
 }
-func (*UnimplementedReplicaManagerServer) ListReplicas(context.Context, *ListReplicasRequest) (*ListReplicasResponse, error) {
+func (*UnimplementedReplicaManagerSvcServer) ListReplicas(context.Context, *ListReplicasRequest) (*ListReplicasResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListReplicas not implemented")
 }
-func (*UnimplementedReplicaManagerServer) DeleteReplica(context.Context, *DeleteReplicaRequest) (*DeleteReplicaResponse, error) {
+func (*UnimplementedReplicaManagerSvcServer) DeleteReplica(context.Context, *DeleteReplicaRequest) (*DeleteReplicaResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteReplica not implemented")
 }
-func (*UnimplementedReplicaManagerServer) SetLeader(context.Context, *SetLeaderRequest) (*SetLeaderResponse, error) {
+func (*UnimplementedReplicaManagerSvcServer) SetLeader(context.Context, *SetLeaderRequest) (*SetLeaderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetLeader not implemented")
 }
-func (*UnimplementedReplicaManagerServer) GetLeader(context.Context, *GetLeaderRequest) (*GetLeaderResponse, error) {
+func (*UnimplementedReplicaManagerSvcServer) GetLeader(context.Context, *GetLeaderRequest) (*GetLeaderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetLeader not implemented")
 }
-func (*UnimplementedReplicaManagerServer) Set(context.Context, *SetRequest) (*SetResponse, error) {
+func (*UnimplementedReplicaManagerSvcServer) Set(context.Context, *SetRequest) (*SetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Set not implemented")
 }
-func (*UnimplementedReplicaManagerServer) Get(context.Context, *GetRequest) (*GetResponse, error) {
+func (*UnimplementedReplicaManagerSvcServer) Get(context.Context, *GetRequest) (*GetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (*UnimplementedReplicaManagerServer) SetAlgorithm(context.Context, *SetAlgorithmRequest) (*SetAlgorithmResponse, error) {
+func (*UnimplementedReplicaManagerSvcServer) SetAlgorithm(context.Context, *SetAlgorithmRequest) (*SetAlgorithmResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetAlgorithm not implemented")
 }
-func (*UnimplementedReplicaManagerServer) GetAlgorithm(context.Context, *GetAlgorithmRequest) (*GetAlgorithmResponse, error) {
+func (*UnimplementedReplicaManagerSvcServer) GetAlgorithm(context.Context, *GetAlgorithmRequest) (*GetAlgorithmResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAlgorithm not implemented")
 }
 
-func RegisterReplicaManagerServer(s *grpc.Server, srv ReplicaManagerServer) {
-	s.RegisterService(&_ReplicaManager_serviceDesc, srv)
+func RegisterReplicaManagerSvcServer(s *grpc.Server, srv ReplicaManagerSvcServer) {
+	s.RegisterService(&_ReplicaManagerSvc_serviceDesc, srv)
 }
 
-func _ReplicaManager_CreateReplica_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ReplicaManagerSvc_CreateReplica_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateReplicaRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ReplicaManagerServer).CreateReplica(ctx, in)
+		return srv.(ReplicaManagerSvcServer).CreateReplica(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/replicamanager.ReplicaManager/CreateReplica",
+		FullMethod: "/replicamanager.ReplicaManagerSvc/CreateReplica",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReplicaManagerServer).CreateReplica(ctx, req.(*CreateReplicaRequest))
+		return srv.(ReplicaManagerSvcServer).CreateReplica(ctx, req.(*CreateReplicaRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ReplicaManager_ListReplicas_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ReplicaManagerSvc_ListReplicas_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListReplicasRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ReplicaManagerServer).ListReplicas(ctx, in)
+		return srv.(ReplicaManagerSvcServer).ListReplicas(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/replicamanager.ReplicaManager/ListReplicas",
+		FullMethod: "/replicamanager.ReplicaManagerSvc/ListReplicas",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReplicaManagerServer).ListReplicas(ctx, req.(*ListReplicasRequest))
+		return srv.(ReplicaManagerSvcServer).ListReplicas(ctx, req.(*ListReplicasRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ReplicaManager_DeleteReplica_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ReplicaManagerSvc_DeleteReplica_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteReplicaRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ReplicaManagerServer).DeleteReplica(ctx, in)
+		return srv.(ReplicaManagerSvcServer).DeleteReplica(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/replicamanager.ReplicaManager/DeleteReplica",
+		FullMethod: "/replicamanager.ReplicaManagerSvc/DeleteReplica",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReplicaManagerServer).DeleteReplica(ctx, req.(*DeleteReplicaRequest))
+		return srv.(ReplicaManagerSvcServer).DeleteReplica(ctx, req.(*DeleteReplicaRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ReplicaManager_SetLeader_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ReplicaManagerSvc_SetLeader_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SetLeaderRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ReplicaManagerServer).SetLeader(ctx, in)
+		return srv.(ReplicaManagerSvcServer).SetLeader(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/replicamanager.ReplicaManager/SetLeader",
+		FullMethod: "/replicamanager.ReplicaManagerSvc/SetLeader",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReplicaManagerServer).SetLeader(ctx, req.(*SetLeaderRequest))
+		return srv.(ReplicaManagerSvcServer).SetLeader(ctx, req.(*SetLeaderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ReplicaManager_GetLeader_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ReplicaManagerSvc_GetLeader_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetLeaderRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ReplicaManagerServer).GetLeader(ctx, in)
+		return srv.(ReplicaManagerSvcServer).GetLeader(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/replicamanager.ReplicaManager/GetLeader",
+		FullMethod: "/replicamanager.ReplicaManagerSvc/GetLeader",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReplicaManagerServer).GetLeader(ctx, req.(*GetLeaderRequest))
+		return srv.(ReplicaManagerSvcServer).GetLeader(ctx, req.(*GetLeaderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ReplicaManager_Set_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ReplicaManagerSvc_Set_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SetRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ReplicaManagerServer).Set(ctx, in)
+		return srv.(ReplicaManagerSvcServer).Set(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/replicamanager.ReplicaManager/Set",
+		FullMethod: "/replicamanager.ReplicaManagerSvc/Set",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReplicaManagerServer).Set(ctx, req.(*SetRequest))
+		return srv.(ReplicaManagerSvcServer).Set(ctx, req.(*SetRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ReplicaManager_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ReplicaManagerSvc_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ReplicaManagerServer).Get(ctx, in)
+		return srv.(ReplicaManagerSvcServer).Get(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/replicamanager.ReplicaManager/Get",
+		FullMethod: "/replicamanager.ReplicaManagerSvc/Get",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReplicaManagerServer).Get(ctx, req.(*GetRequest))
+		return srv.(ReplicaManagerSvcServer).Get(ctx, req.(*GetRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ReplicaManager_SetAlgorithm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ReplicaManagerSvc_SetAlgorithm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SetAlgorithmRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ReplicaManagerServer).SetAlgorithm(ctx, in)
+		return srv.(ReplicaManagerSvcServer).SetAlgorithm(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/replicamanager.ReplicaManager/SetAlgorithm",
+		FullMethod: "/replicamanager.ReplicaManagerSvc/SetAlgorithm",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReplicaManagerServer).SetAlgorithm(ctx, req.(*SetAlgorithmRequest))
+		return srv.(ReplicaManagerSvcServer).SetAlgorithm(ctx, req.(*SetAlgorithmRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ReplicaManager_GetAlgorithm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ReplicaManagerSvc_GetAlgorithm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetAlgorithmRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ReplicaManagerServer).GetAlgorithm(ctx, in)
+		return srv.(ReplicaManagerSvcServer).GetAlgorithm(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/replicamanager.ReplicaManager/GetAlgorithm",
+		FullMethod: "/replicamanager.ReplicaManagerSvc/GetAlgorithm",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReplicaManagerServer).GetAlgorithm(ctx, req.(*GetAlgorithmRequest))
+		return srv.(ReplicaManagerSvcServer).GetAlgorithm(ctx, req.(*GetAlgorithmRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-var _ReplicaManager_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "replicamanager.ReplicaManager",
-	HandlerType: (*ReplicaManagerServer)(nil),
+var _ReplicaManagerSvc_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "replicamanager.ReplicaManagerSvc",
+	HandlerType: (*ReplicaManagerSvcServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "CreateReplica",
-			Handler:    _ReplicaManager_CreateReplica_Handler,
+			Handler:    _ReplicaManagerSvc_CreateReplica_Handler,
 		},
 		{
 			MethodName: "ListReplicas",
-			Handler:    _ReplicaManager_ListReplicas_Handler,
+			Handler:    _ReplicaManagerSvc_ListReplicas_Handler,
 		},
 		{
 			MethodName: "DeleteReplica",
-			Handler:    _ReplicaManager_DeleteReplica_Handler,
+			Handler:    _ReplicaManagerSvc_DeleteReplica_Handler,
 		},
 		{
 			MethodName: "SetLeader",
-			Handler:    _ReplicaManager_SetLeader_Handler,
+			Handler:    _ReplicaManagerSvc_SetLeader_Handler,
 		},
 		{
 			MethodName: "GetLeader",
-			Handler:    _ReplicaManager_GetLeader_Handler,
+			Handler:    _ReplicaManagerSvc_GetLeader_Handler,
 		},
 		{
 			MethodName: "Set",
-			Handler:    _ReplicaManager_Set_Handler,
+			Handler:    _ReplicaManagerSvc_Set_Handler,
 		},
 		{
 			MethodName: "Get",
-			Handler:    _ReplicaManager_Get_Handler,
+			Handler:    _ReplicaManagerSvc_Get_Handler,
 		},
 		{
 			MethodName: "SetAlgorithm",
-			Handler:    _ReplicaManager_SetAlgorithm_Handler,
+			Handler:    _ReplicaManagerSvc_SetAlgorithm_Handler,
 		},
 		{
 			MethodName: "GetAlgorithm",
-			Handler:    _ReplicaManager_GetAlgorithm_Handler,
+			Handler:    _ReplicaManagerSvc_GetAlgorithm_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "replicamanager.proto",
+	Metadata: "replicamanager/replicamanager.proto",
 }

@@ -48,14 +48,15 @@ func NewCommand(logger *log.Logger) *ffcli.Command {
 						ShortHelp:  "Start a single replica server.",
 						FlagSet:    flagSet,
 						Exec: func(ctx context.Context, args []string) error {
+							// TODO: Make secure communication possible.
 							conn, err := grpc.Dial(fmt.Sprintf(":%d", *port), grpc.WithInsecure())
 							if err != nil {
 								return err
 							}
 							defer conn.Close()
 
-							client := NewReplicaManagerClient(conn)
-							_, err = client.CreateReplica(ctx, &CreateReplicaRequest{
+							rm := NewReplicaManagerSvcClient(conn)
+							_, err = rm.CreateReplica(ctx, &CreateReplicaRequest{
 								// TODO: don't hardcode these values.
 								Address:         ":8119",
 								Algorithm:       "simpleleader",
@@ -63,6 +64,24 @@ func NewCommand(logger *log.Logger) *ffcli.Command {
 								SyncIntervalSec: 5,
 							})
 
+							return err
+						},
+					},
+					{
+						Name:       "list",
+						ShortUsage: "list [flags]",
+						ShortHelp:  "List all running replicas managed by the replicamanager.",
+						FlagSet:    flagSet,
+						Exec: func(ctx context.Context, args []string) error {
+							// TODO: Make secure communication possible.
+							conn, err := grpc.Dial(fmt.Sprintf(":%d", *port), grpc.WithInsecure())
+							if err != nil {
+								return err
+							}
+							defer conn.Close()
+
+							rm := NewReplicaManagerSvcClient(conn)
+							_, err = rm.ListReplicas(ctx, &ListReplicasRequest{})
 							return err
 						},
 					},
@@ -96,11 +115,12 @@ func start(port int, logger *log.Logger) func(context.Context, []string) error {
 		reflection.Register(s)
 
 		// Register ReplicaManager server.
-		RegisterReplicaManagerServer(s, &server{
-			logger: logger,
+		RegisterReplicaManagerSvcServer(s, &server{
+			logger:   logger,
+			replicas: make(map[string]string),
 		})
 
-		logger.Printf("server listening on port :%d\n", port)
+		logger.Printf("replicamanager server listening on port :%d\n", port)
 		if err := s.Serve(lis); err != nil {
 			return err
 		}
