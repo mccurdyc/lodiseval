@@ -1,11 +1,12 @@
 syntax = "proto3";
 
+import "replica/replica.proto";
+
 package replicamanager;
 
 option go_package = "github.com/mccurdyc/lodiseval/replicamanager";
-import "lodiseval/replica/replica.proto";
 
-service ReplicaManager {
+service ReplicaManagerSvc {
 // =====================================================
 // Replica Management.
 // =====================================================
@@ -49,7 +50,7 @@ message CreateReplicaResponse {
 message ListReplicasRequest {}
 
 message ListReplicasResponse {
-  repeated Replica replicas = 1;
+  repeated replica.Replica replicas = 1;
 }
 
 message DeleteReplicaRequest {

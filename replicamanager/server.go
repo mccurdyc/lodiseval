@@ -10,7 +10,7 @@ import (
 )
 
 type server struct {
-	UnimplementedReplicaManagerServer
+	UnimplementedReplicaManagerSvcServer
 
 	logger *log.Logger
 
@@ -51,20 +51,21 @@ func (s *server) CreateReplica(ctx context.Context, req *CreateReplicaRequest) (
 	}, nil
 }
 
-func (s *server) ListReplicas(_ context.Context, _ *ListReplicasRequest) *ListReplicasResponse {
-	s.m.Lock()
-	for id, addr := range s.replicas {
-	}
-	s.m.Unlock()
-
-	return &ListReplicasResponse{
-		Id: idStr,
-	}, nil
-}
-
-func (s *server) printFormattedReplicaList() string {
-
-}
+// TODO NEXT!
+// func (s *server) ListReplicas(_ context.Context, _ *ListReplicasRequest) (*ListReplicasResponse, error) {
+// 	s.m.Lock()
+// 	for id, addr := range s.replicas {
+// 	}
+// 	s.m.Unlock()
+//
+// 	return &ListReplicasResponse{
+// 		Id: idStr,
+// 	}, nil
+// }
+//
+// func (s *server) printFormattedReplicaList() string {
+//
+// }
 
 //
 // func (s *server) DeleteReplica(_ context.Context, _ *DeleteReplicaRequest) *DeleteReplicaResponse {

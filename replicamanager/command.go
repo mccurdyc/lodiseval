@@ -55,7 +55,7 @@ func NewCommand(logger *log.Logger) *ffcli.Command {
 							}
 							defer conn.Close()
 
-							rm := NewReplicaManagerClient(conn)
+							rm := NewReplicaManagerSvcClient(conn)
 							_, err = rm.CreateReplica(ctx, &CreateReplicaRequest{
 								// TODO: don't hardcode these values.
 								Address:         ":8119",
@@ -80,7 +80,7 @@ func NewCommand(logger *log.Logger) *ffcli.Command {
 							}
 							defer conn.Close()
 
-							rm := NewReplicaManagerClient(conn)
+							rm := NewReplicaManagerSvcClient(conn)
 							_, err = rm.ListReplicas(ctx, &ListReplicasRequest{})
 							return err
 						},
@@ -115,7 +115,7 @@ func start(port int, logger *log.Logger) func(context.Context, []string) error {
 		reflection.Register(s)
 
 		// Register ReplicaManager server.
-		RegisterReplicaManagerServer(s, &server{
+		RegisterReplicaManagerSvcServer(s, &server{
 			logger:   logger,
 			replicas: make(map[string]string),
 		})
