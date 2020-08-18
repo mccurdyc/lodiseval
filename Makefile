@@ -20,7 +20,7 @@ all: mod-download dev-dependencies tidy fmt fiximports test vet staticcheck ## R
 
 generate: ## Compiles protobufs, generating Go code.
 	@echo "==> Compiling protobufs."
-	@find . -type f -name *.proto | awk -F'[./]' '{system("protoc -I "$$3" --go_out=plugins=grpc:"$$3" "$$4".proto")}'
+	@protoc -I=. --go_out=plugins=grpc,paths=source_relative:. **/*.proto
 .PHONY: generate
 
 build: generate ## Compiles the protobufs and builds the lodiseval binary.
