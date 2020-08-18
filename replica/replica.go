@@ -5,17 +5,11 @@ import (
 	"log"
 	"net"
 
-	"github.com/mccurdyc/lodiseval/store"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/health"
 	healthpb "google.golang.org/grpc/health/grpc_health_v1"
 	"google.golang.org/grpc/reflection"
 )
-
-type Replica struct {
-	ID    string
-	Store store.Store
-}
 
 var serviceName = "replica"
 
