@@ -76,7 +76,7 @@ staticcheck: ## Runs the staticcheck linter.
 	@staticcheck ./...
 .PHONY: staticcheck
 
-test: build staticcheck vet fmt ## Runs the test suit with minimal flags for quick iteration.
+test: ## Runs the test suit with minimal flags for quick iteration.
 	@go test -v ${GO_LIST}/...
 .PHONY: test
 
