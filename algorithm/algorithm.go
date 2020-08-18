@@ -3,7 +3,7 @@ package algorithm
 import (
 	"context"
 
-	"github.com/mccurdyc/lodiseval/replica"
+	"github.com/mccurdyc/lodiseval/store"
 )
 
 // Algorithm defines the minimal interface that an algorithm must implement for
@@ -17,10 +17,14 @@ type Algorithm interface {
 	Describe() string
 }
 
+type Replica interface {
+	ID() string
+	Store() store.Store
+}
+
 // Config contains configuration parameters used in the algorithm factory function.
 type Config struct {
-	Leader   string
-	Replicas map[string]*replica.Replica
+	Leader string
 
 	// Opaque is an opaque configuration.
 	Opaque map[string]string
