@@ -35,8 +35,7 @@ func Create(ctx context.Context, cfg *Config) error {
 	// Add reflection so that clients can query for available services, methods, etc.
 	reflection.Register(s)
 
-	// Register ReplicaManager server.
-	RegisterReplicaServer(s, &server{
+	RegisterReplicaSvcServer(s, &server{
 		id: cfg.ID,
 	})
 

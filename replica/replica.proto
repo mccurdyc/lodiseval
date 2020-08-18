@@ -2,9 +2,9 @@ syntax = "proto3";
 
 package replica;
 
-option go_package = ".;replica";
+option go_package = "github.com/mccurdyc/lodiseval/replica";
 
-service Replica {
+service ReplicaSvc {
 // =====================================================
 // Replica Management.
 // =====================================================
