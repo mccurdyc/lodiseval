@@ -16,7 +16,6 @@ type server struct {
 
 	// TODO: should these have separate mutexes?
 	m        sync.Mutex
-	idCount  int
 	replicas map[string]string
 }
 
