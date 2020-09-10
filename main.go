@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"flag"
 	"log"
 	"os"
 
@@ -11,6 +12,7 @@ import (
 	"github.com/mccurdyc/lodiseval/algorithm"
 	"github.com/mccurdyc/lodiseval/builtin/algorithm/simpleleader"
 	"github.com/mccurdyc/lodiseval/builtin/store/mapstore"
+	"github.com/mccurdyc/lodiseval/replica"
 	"github.com/mccurdyc/lodiseval/replicamanager"
 	"github.com/mccurdyc/lodiseval/store"
 )
@@ -23,11 +25,17 @@ func main() {
 }
 
 func Run(ctx context.Context, args []string, l *log.Logger) int {
+	var (
+		rootFlagSet = flag.NewFlagSet("lodiseval", flag.ExitOnError)
+	)
+
 	root := &ffcli.Command{
 		Name:       "lodiseval",
 		ShortUsage: "lodiseval <subcommand> [flags]",
+		FlagSet:    rootFlagSet,
 		Subcommands: []*ffcli.Command{
 			replicamanager.NewCommand(l),
+			replica.NewCommand(l),
 			algorithm.NewCommand(
 				map[string]algorithm.Factory{
 					"simpleleader": simpleleader.Factory,
@@ -38,6 +46,9 @@ func Run(ctx context.Context, args []string, l *log.Logger) int {
 					"mapstore": mapstore.Factory,
 				},
 			),
+		},
+		Exec: func(context.Context, []string) error {
+			return flag.ErrHelp
 		},
 	}
 

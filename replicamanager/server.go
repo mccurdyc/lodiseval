@@ -3,10 +3,7 @@ package replicamanager
 import (
 	"context"
 	"log"
-	"strconv"
 	sync "sync"
-
-	"github.com/mccurdyc/lodiseval/replica"
 )
 
 type server struct {
@@ -22,80 +19,27 @@ type server struct {
 // =====================================================
 // Replica Management.
 // =====================================================
-func (s *server) CreateReplica(ctx context.Context, req *CreateReplicaRequest) (*CreateReplicaResponse, error) {
-	id := -1
+func (s *server) RegisterReplica(_ context.Context, req *RegisterReplicaRequest) (*RegisterReplicaResponse, error) {
 	s.m.Lock()
-	s.idCount += 1
-	id = s.idCount
-	s.m.Unlock()
-	idStr := strconv.Itoa(id)
-
-	cfg := replica.Config{
-		ID:     idStr,
-		Addr:   req.Address,
-		Logger: s.logger,
-	}
-
-	err := replica.Create(ctx, &cfg)
-	if err != nil {
-		return nil, err
-	}
-
-	s.m.Lock()
-	s.replicas[idStr] = cfg.Addr
+	s.replicas[req.Replica.Id] = req.Replica.Address
 	s.m.Unlock()
 
-	return &CreateReplicaResponse{
-		Id: idStr,
-	}, nil
+	return &RegisterReplicaResponse{}, nil
 }
 
-// TODO NEXT!
-// func (s *server) ListReplicas(_ context.Context, _ *ListReplicasRequest) (*ListReplicasResponse, error) {
-// 	s.m.Lock()
-// 	for id, addr := range s.replicas {
-// 	}
-// 	s.m.Unlock()
-//
-// 	return &ListReplicasResponse{
-// 		Id: idStr,
-// 	}, nil
-// }
-//
-// func (s *server) printFormattedReplicaList() string {
-//
-// }
+func (s *server) ListReplicas(_ context.Context, req *ListReplicasRequest) (*ListReplicasResponse, error) {
+	var replicas []*Replica
 
-//
-// func (s *server) DeleteReplica(_ context.Context, _ *DeleteReplicaRequest) *DeleteReplicaResponse {
-// }
-//
-// // =====================================================
-// // Leader Management.
-// // =====================================================
-//
-// func (s *server) SetLeader(_ context.Context, _ *SetLeaderRequest) *SetLeaderResponse {
-// }
-//
-// func (s *server) GetLeader(_ context.Context, _ *GetLeaderRequest) *GetLeaderResponse {
-// }
-//
-// // =====================================================
-// // Value Storage and Retrieval Operations.
-// // =====================================================
-//
-// func (s *server) Set(_ context.Context, _ *SetRequest) *SetResponse {
-// }
-//
-// func (s *server) Get(_ context.Context, _ *GetRequest) *GetResponse {
-// }
-//
-// // =====================================================
-// // Algorithm Management.
-// // =====================================================
-//
-// func (s *server) SetAlgorithm(_ context.Context, _ *SetAlgorithmRequest) *SetAlgorithmResponse {
-// }
-//
-// func (s *server) GetAlgorithm(_ context.Context, _ *GetAlgorithmRequest) *GetAlgorithmResponse {
-// }
+	s.m.Lock()
+	for k, v := range s.replicas {
+		replicas = append(replicas, &Replica{
+			Id:      k,
+			Address: v,
+		})
+	}
+	s.m.Unlock()
+
+	return &ListReplicasResponse{
+		Replicas: replicas,
+	}, nil
+}

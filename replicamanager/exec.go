@@ -12,11 +12,13 @@ import (
 	"google.golang.org/grpc/reflection"
 )
 
+const serviceName = "ReplicaManager"
+
 type execFn func(context.Context, []string) error
 
-func start(addr string, logger *log.Logger) execFn {
+func start(addr *string, logger *log.Logger) execFn {
 	return func(_ context.Context, _ []string) error {
-		lis, err := net.Listen("tcp", addr)
+		lis, err := net.Listen("tcp", *addr)
 		if err != nil {
 			return err
 		}
@@ -37,7 +39,7 @@ func start(addr string, logger *log.Logger) execFn {
 			replicas: make(map[string]string),
 		})
 
-		logger.Printf("replicamanager server listening at %s\n", addr)
+		logger.Printf("replicamanager server listening at %s\n", *addr)
 		if err := s.Serve(lis); err != nil {
 			return err
 		}
@@ -46,21 +48,13 @@ func start(addr string, logger *log.Logger) execFn {
 	}
 }
 
-func createReplica(addr string, rmc ReplicaManagerSvcClient, alg string, store string, _ *log.Logger) execFn {
+func listReplicas(mgrAddr *string, logger *log.Logger) execFn {
 	return func(ctx context.Context, _ []string) error {
-		_, err := rmc.CreateReplica(ctx, &CreateReplicaRequest{
-			Address:         addr,
-			Algorithm:       alg,
-			Store:           store,
-			SyncIntervalSec: 5,
-		})
+		// TODO: Make secure communication possible via TLS.
+		// TODO: This connection currently doesn't get closed.
+		conn, _ := grpc.Dial(*mgrAddr, grpc.WithInsecure())
+		rmc := NewReplicaManagerSvcClient(conn)
 
-		return err
-	}
-}
-
-func listReplicas(rmc ReplicaManagerSvcClient, logger *log.Logger) execFn {
-	return func(ctx context.Context, _ []string) error {
 		lr, err := rmc.ListReplicas(ctx, &ListReplicasRequest{})
 
 		fmt.Printf("REPLICAS: %d\n", len(lr.Replicas))

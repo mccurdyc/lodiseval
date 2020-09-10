@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-import "replica/replica.proto";
-
 package replicamanager;
 
 option go_package = "github.com/mccurdyc/lodiseval/replicamanager";
@@ -10,7 +8,7 @@ service ReplicaManagerSvc {
 // =====================================================
 // Replica Management.
 // =====================================================
-  rpc CreateReplica(CreateReplicaRequest) returns (CreateReplicaResponse);
+  rpc RegisterReplica(RegisterReplicaRequest) returns (RegisterReplicaResponse);
   rpc ListReplicas(ListReplicasRequest) returns (ListReplicasResponse);
   rpc DeleteReplica(DeleteReplicaRequest) returns (DeleteReplicaResponse);
 
@@ -19,12 +17,6 @@ service ReplicaManagerSvc {
 // =====================================================
   rpc SetLeader(SetLeaderRequest) returns (SetLeaderResponse);
   rpc GetLeader(GetLeaderRequest) returns (GetLeaderResponse);
-
-// =====================================================
-// Value Storage and Retrieval Operations.
-// =====================================================
-  rpc Set(SetRequest) returns (SetResponse);
-  rpc Get(GetRequest) returns (GetResponse);
 
 // =====================================================
 // Algorithm Management.
@@ -36,21 +28,23 @@ service ReplicaManagerSvc {
 // =====================================================
 // Replica Management.
 // =====================================================
-message CreateReplicaRequest {
-  string address = 1;
-  string algorithm = 2;
-  string store = 3;
-  uint32 sync_interval_sec = 4;
+message RegisterReplicaRequest {
+  Replica replica = 1;
 }
 
-message CreateReplicaResponse {
+message RegisterReplicaResponse {
   string id = 1;
 }
 
 message ListReplicasRequest {}
 
+message Replica {
+  string id = 1;
+  string address = 2;
+}
+
 message ListReplicasResponse {
-  repeated replica.Replica replicas = 1;
+  repeated Replica replicas = 1;
 }
 
 message DeleteReplicaRequest {
@@ -74,24 +68,6 @@ message GetLeaderRequest{}
 
 message GetLeaderResponse{
   string id = 1;
-}
-
-// =====================================================
-// Value Storage and Retrieval Operations.
-// =====================================================
-message SetRequest{
-  string key = 1;
-  string value = 2;
-}
-
-message SetResponse{}
-
-message GetRequest{
-  string key = 1;
-}
-
-message GetResponse{
-  string value = 1;
 }
 
 // =====================================================

@@ -11,12 +11,6 @@ service ReplicaSvc {
   rpc ID(IDRequest) returns (IDResponse);
 
 // =====================================================
-// Leader Management.
-// =====================================================
-  rpc SetLeader(SetLeaderRequest) returns (SetLeaderResponse);
-  rpc GetLeader(GetLeaderRequest) returns (GetLeaderResponse);
-
-// =====================================================
 // Value Storage and Retrieval Operations.
 // =====================================================
   rpc Set(SetRequest) returns (SetResponse);
@@ -44,18 +38,14 @@ message IDResponse {
   string id = 1;
 }
 
-// =====================================================
-// Leader Management.
-// =====================================================
-message SetLeaderRequest {
-  string id = 1;
+message CreateReplicaRequest {
+  string address = 1;
+  string algorithm = 2;
+  string store = 3;
+  uint32 sync_interval_sec = 4;
 }
 
-message SetLeaderResponse {}
-
-message GetLeaderRequest{}
-
-message GetLeaderResponse{
+message CreateReplicaResponse {
   string id = 1;
 }
 
