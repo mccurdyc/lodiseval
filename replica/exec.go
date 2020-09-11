@@ -63,6 +63,7 @@ func start(addr *string, mgrAddr *string, alg *string, store *string, logger *lo
 		})
 
 		logger.Printf("replica server listening at %s\n", *addr)
+		logger.Printf("replica server pointed at replicamanager running at %s\n", *mgrAddr)
 		if err := s.Serve(lis); err != nil {
 			return err
 		}
