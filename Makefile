@@ -15,7 +15,7 @@ COVER_PROFILE := ${COVER_DIR}/cover.out
 
 default: help
 
-all: mod-download dev-dependencies tidy fmt fiximports test vet staticcheck ## Runs the required cleaning and verification targets.
+all: mod-download dev-dependencies fmt test vet staticcheck build install ## Runs the required cleaning and verification targets.
 .PHONY: all
 
 generate: ## Compiles protobufs, generating Go code.
@@ -28,6 +28,11 @@ build: generate ## Compiles the protobufs and builds the lodiseval binary.
 	@go build -o bin/lodiseval main.go
 .PHONY: build
 
+install: ## Runs 'go install', putting the binary in $GOPATH/bin.
+	@echo "==> Installing binary."
+	@go install github.com/mccurdyc/lodiseval
+.PHONY: install
+
 tidy: ## Cleans the Go module.
 	@echo "==> Tidying module."
 	@go mod tidy
@@ -39,7 +44,7 @@ mod-download: ## Downloads the Go module.
 .PHONY: mod-download
 
 dev-dependencies: ## Downloads the necessesary dev dependencies.
-	@echo "==> Downloading development dependencies"
+	@echo "==> Downloading development dependencies."
 	@go install honnef.co/go/tools/cmd/staticcheck
 	@go install golang.org/x/tools/cmd/goimports
 .PHONY: dev-dependencies
